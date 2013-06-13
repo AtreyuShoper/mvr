@@ -76,5 +76,20 @@ public function save(){
         return $this->insert();
     }
 }
+ public function verify_account($_account_name, $_password)
+   {
+      $query = $this
+            ->db
+            ->where('account_name', $_account_name)
+            ->where('password', md5($_password))
+            ->limit(1)
+            ->get('business_account');
+
+      if ( $query->num_rows > 0 ) {
+         // person has account with us
+         return $query->row();
+      }
+      return false;
+   }
 }
 ?>
