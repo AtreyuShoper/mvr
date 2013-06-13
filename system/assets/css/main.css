@@ -1,0 +1,115 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+*{
+    color: #000000;
+}
+/*.menu-container ul#main_navigation{
+    list-style: none;
+    margin:0;
+}
+#main_navigation li{
+    float:left;
+    background-color: #003bb3;
+}
+#main_navigation li a{
+    padding: 10px;
+    color:#000000;
+}
+#main_navigation li a:hover{
+    text-decoration: none;
+}
+#main_navigation li.active, #main_navigation li:hover{
+    background-color: #0480be;
+}*/
+.wrapper{
+    margin: 0 auto;
+}
+
+
+/**Form*/
+form label {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+    display: inline;
+}
+.formtxt {
+    font-size: 12px;
+}
+
+.text {
+    width: 200px;
+}
+
+.left-container h2, .right-container h2, h2{
+    background: none repeat scroll 0 0 #5A5A5A;
+    color: #FFFFFF;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 5px;
+    font-weight: normal;
+    width: 100%;
+}
+.left-container table{
+    border: none;
+    
+}
+.left-container table td{
+    padding-left: 5px;
+    vertical-align: top;
+}
+.left-container, .right-container{
+    font-size: 12px;
+}
+/*.left-container{
+    width: 28%;
+    display: block;
+    float: left;
+    position: relative;
+}
+.right-container{
+    display: block;
+    position: relative;
+    margin-left: 20px;
+    float:left;
+    width: 60%;
+    
+}*/
+.right-container form#business_order_form label, 
+form#business_order_checkout1 label{
+    width:120px;
+    display: inline-block;
+}
+form#account_info label,
+form#login_form label{
+    width:170px;
+    display: inline-block;
+}
+form#account_info .inputs{
+    display: inline-block;
+}
+.right-container form#business_order_form div.error, 
+form#business_order_checkout1 div.error, 
+form#account_info div.error{
+    position:relative;
+    display:inline-block;
+    color: red;
+    font-size:10px;
+}
+
+form#business_order_checkout1 textarea{
+    width: 100%;
+}
+
+form#business_order_checkout1 input[type='radio']{
+    margin:0 5px;
+}
+form#business_order_checkout1 input[type='checkbox']{
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+
