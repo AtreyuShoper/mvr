@@ -34,7 +34,7 @@ class Example extends CI_Controller
 		// Try to AUTH_CAPTURE
 		if( $this->authorize_net->authorizeAndCapture() )
 		{
-			echo '<h2>Success!</h2>';
+			echo '<h2>Success!123</h2>';
 			echo '<p>Transaction ID: ' . $this->authorize_net->getTransactionId() . '</p>';
 			echo '<p>Approval Code: ' . $this->authorize_net->getApprovalCode() . '</p>';
 		}
