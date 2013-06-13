@@ -10,7 +10,7 @@ class Example extends CI_Controller
 	public function index()
 	{
 		// Authorize.net lib
-		$this->load->library('authorize_ne');
+		$this->load->library('authorize_net');
 
 		$auth_net = array(
 			'x_card_num'			=> '4111111111111111', // Visa
