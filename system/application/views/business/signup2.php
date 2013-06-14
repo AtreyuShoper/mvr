@@ -72,7 +72,7 @@
         <div class="form-actions">
             <?php echo form_hidden('step','3'); ?>
             <button type="submit" class="btn btn-primary">Continue</button>
-            <button class="btn" onclick="window.location='<?php echo base_url(''); ?>';return false;" >Cancel</button>  
+            <button class="btn" onclick="window.location='<?php echo base_url('business'); ?>';return false;" >Cancel</button>  
         </div>
     </fieldset>
     </div>

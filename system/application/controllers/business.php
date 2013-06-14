@@ -48,8 +48,7 @@ function order(){
         
         switch ($_cart_action){
         case 'insert':
-            $this->form_validation->set_message('required', '* Required');
-            $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+            $this->form_validation->set_error_delimiters('', '');
             $this->form_validation->set_rules('driver_first', 'First Name', 'required');
             $this->form_validation->set_rules('driver_middle', 'Middle Name', 'required');
             $this->form_validation->set_rules('driver_last', 'Last Name', 'required');
@@ -145,8 +144,7 @@ function order(){
                     $_continue1 = $this->input->post('continue1');
                     $_template = 'business/checkout1';
                     if(!empty($_continue1) && $_continue1 != ''){
-                    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-                    $this->form_validation->set_message('required', '* Required');
+                    $this->form_validation->set_error_delimiters('', '');
                     $this->form_validation->set_rules('card_type', 'Card Type', 'required');
                     $this->form_validation->set_rules('card_holder', 'Card Holder Name', 'required');
                     $this->form_validation->set_rules('card_number', 'Card Number', 'callback_ccnovalid');
@@ -232,8 +230,7 @@ function history(){
     
 function account(){
     logged_in_check();
-    $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-    $this->form_validation->set_message('required', '* Required');
+    $this->form_validation->set_error_delimiters('', '');
     $this->form_validation->set_rules('new_password', 'Password', 'required|matches[new_password_v]');
     $this->form_validation->set_rules('new_password_v', 'Password Confirmation', 'required');
     $this->form_validation->set_rules('bus_contact_first', 'Contact First Name', 'required');
@@ -296,6 +293,7 @@ function logout(){
     redirect(base_url('business/signin'));
 }
 function signin(){
+    $this->form_validation->set_error_delimiters('', '');
     $this->form_validation->set_rules('login', 'Business  Account', 'required');
     $this->form_validation->set_rules('pass', 'Password', 'required|min_length[4]');
     //print_r($this->input->post());
@@ -309,8 +307,9 @@ function signin(){
             $this->session->set_userdata('userid',$res->id);
             $this->session->set_userdata('user_data',$user_data);
             redirect(base_url('business'));
+         }else{
+             $this->session->set_userdata('login_message','<strong>Invalid login!</stronng> Please check your username or password');
          }
-
       }
     $this->data['title'] = 'Administration Panel : Login';
     $this->template->load('login', null, $this->data);

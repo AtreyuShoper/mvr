@@ -48,6 +48,10 @@
                    <?php echo form_open(base_url('business/signin'),array('class' => 'well form-horizontal','id' => 'login_form')); ?>
                    <fieldset>
                        <legend>Login</legend>
+                       <?php if($this->session->userdata('login_message')): ?>
+                        <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $this->session->userdata('login_message'); ?></div>
+                       <?php endif; ?>
+                        <?php echo validation_errors('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>'); ?>
                        <div class='control-group'>
                         <label class='control-label' for='login'>Account Name or Email:</label>
                             <div class='controls'>
