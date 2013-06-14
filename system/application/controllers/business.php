@@ -29,6 +29,8 @@ public function __construct(){
    
 }
 function index(){
+    logged_in_check();
+    //redirect(base_url('business/signin'));
     $this->menu['active'] = 'home';
     $this->data['title'] = 'Administration Panel';
     $this->template->load('default', 'business/home', $this->data);
@@ -37,6 +39,7 @@ function index(){
 function order(){
     //print_r($_POST);
    // print_r($this->input->post());
+    logged_in_check();
     $this->menu['active'] = 'order';
     $this->data['title'] = 'Administration Panel';
     $_template = 'business/order';
@@ -208,6 +211,7 @@ function order(){
 }
 
 function employees(){
+    logged_in_check();
     $this->menu['active'] = 'employees';
     $this->data['title'] = 'Administration Panel';
     $this->load->model('business/model_employees');
@@ -217,6 +221,7 @@ function employees(){
 }
  
 function history(){
+    logged_in_check();
     $this->menu['active'] = 'history';
     $this->data['title'] = 'Administration Panel';
     $this->load->model('business/model_orders');
@@ -226,6 +231,7 @@ function history(){
 }
     
 function account(){
+    logged_in_check();
     $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
     $this->form_validation->set_message('required', '* Required');
     $this->form_validation->set_rules('new_password', 'Password', 'required|matches[new_password_v]');
@@ -267,6 +273,7 @@ function account(){
 }
     
 function cart(){
+    logged_in_check();
     $this->menu['active'] = 'cart';
     $this->data['title'] = 'Administration Panel';
     $this->data['submit_label'] = 'Checkout';
@@ -279,16 +286,34 @@ function cart(){
 }
 
 function support(){
+    logged_in_check();
     $this->menu['active'] = 'support';
     $this->data['title'] = 'Administration Panel';
     $this->template->load('default', 'business/support', $this->data);
 }
 function logout(){
     $this->session->sess_destroy();
-    redirect(base_url('business'));
+    redirect(base_url('business/signin'));
 }
 function signin(){
-    $this->template->load('login', null, null);
+    $this->form_validation->set_rules('login', 'Business  Account', 'required');
+    $this->form_validation->set_rules('pass', 'Password', 'required|min_length[4]');
+    //print_r($this->input->post());
+    if ( $this->form_validation->run() !== false ) {
+         // then validation passed. Get from db
+         $this->load->model('business/model_business');
+         $res = $this->model_business->verify_account($this->input->post('login'),$this->input->post('pass'));
+         
+         if ( $res !== false ) {
+            $user_data = array('business_account' => $this->input->post('login'),'logged' => true);
+            $this->session->set_userdata('userid',$res->id);
+            $this->session->set_userdata('user_data',$user_data);
+            redirect(base_url('business'));
+         }
+
+      }
+    $this->data['title'] = 'Administration Panel : Login';
+    $this->template->load('login', null, $this->data);
 }    
 function signup(){
     //$this->load->model('business/model_business');
@@ -303,7 +328,7 @@ function signup(){
           //var_dump($this->input->post());
           $_template = 'business/signup2';
             $this->form_validation->set_error_delimiters('', '');
-            $this->form_validation->set_rules('business_account', 'Business Account', 'required');
+            $this->form_validation->set_rules('business_account', 'Business Account', 'required|is_unique[business_account.account_name]');
             $this->form_validation->set_rules('business_password', 'Password', 'required|matches[business_password_v]');
             $this->form_validation->set_rules('business_password_v', 'Password Confirmation', 'required');
             if($this->form_validation->run()==FALSE){
@@ -371,7 +396,7 @@ function signup(){
                 
                 $_new_account = new Model_Business();
                 $_new_account->account_name = $_data_step1['business_account'];
-                $_new_account->password = $_data_step1['business_password'];
+                $_new_account->password = md5($_data_step1['business_password']);
                 $_new_account->first_name = $_data_step2['bus_contact_first'];
                 $_new_account->last_name = $_data_step2['bus_contact_last'];
                 $_new_account->business_name = $_data_step2['bus_name'];
