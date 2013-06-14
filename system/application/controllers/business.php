@@ -29,7 +29,7 @@ public function __construct(){
    
 }
 function index(){
-    logged_in_check();
+    business_logged_in_check();
     //redirect(base_url('business/signin'));
     $this->menu['active'] = 'home';
     $this->data['title'] = 'Administration Panel';
@@ -39,7 +39,7 @@ function index(){
 function order(){
     //print_r($_POST);
    // print_r($this->input->post());
-    logged_in_check();
+    business_logged_in_check();
     $this->menu['active'] = 'order';
     $this->data['title'] = 'Administration Panel';
     $_template = 'business/order';
@@ -209,7 +209,7 @@ function order(){
 }
 
 function employees(){
-    logged_in_check();
+    business_logged_in_check();
     $this->menu['active'] = 'employees';
     $this->data['title'] = 'Administration Panel';
     $this->load->model('business/model_employees');
@@ -219,7 +219,7 @@ function employees(){
 }
  
 function history(){
-    logged_in_check();
+    business_logged_in_check();
     $this->menu['active'] = 'history';
     $this->data['title'] = 'Administration Panel';
     $this->load->model('business/model_orders');
@@ -229,7 +229,7 @@ function history(){
 }
     
 function account(){
-    logged_in_check();
+    business_logged_in_check();
     $this->form_validation->set_error_delimiters('', '');
     $this->form_validation->set_rules('new_password', 'Password', 'required|matches[new_password_v]');
     $this->form_validation->set_rules('new_password_v', 'Password Confirmation', 'required');
@@ -270,7 +270,7 @@ function account(){
 }
     
 function cart(){
-    logged_in_check();
+    business_logged_in_check();
     $this->menu['active'] = 'cart';
     $this->data['title'] = 'Administration Panel';
     $this->data['submit_label'] = 'Checkout';
@@ -283,7 +283,7 @@ function cart(){
 }
 
 function support(){
-    logged_in_check();
+    business_logged_in_check();
     $this->menu['active'] = 'support';
     $this->data['title'] = 'Administration Panel';
     $this->template->load('default', 'business/support', $this->data);
@@ -438,9 +438,7 @@ function signup(){
     }
 
 }
-function success(){
-    
-}
+
 function ccnovalid($val){
     $this->load->library('cc_validation');
     $validate = $this->cc_validation->validateCreditcard_number($val);
