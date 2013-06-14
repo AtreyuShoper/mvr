@@ -6,11 +6,14 @@
  */
 ?>
 <?php
-function is_logged_in() {
+function logged_in_check() {
     // Get current CodeIgniter instance
     $CI =& get_instance();
     // We need to use $CI->session instead of $this->session
     $user = $CI->session->userdata('user_data');
-    if (!isset($user)) { return false; } else { return true; }
+    if (!isset($user['logged']) || $user['logged'] != TRUE)
+    {
+        redirect(base_url('business/signin'));
+    }
 }
 ?>
