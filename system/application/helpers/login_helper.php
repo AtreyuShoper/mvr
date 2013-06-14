@@ -6,7 +6,7 @@
  */
 ?>
 <?php
-function logged_in_check() {
+function business_logged_in_check() {
     // Get current CodeIgniter instance
     $CI =& get_instance();
     // We need to use $CI->session instead of $this->session
