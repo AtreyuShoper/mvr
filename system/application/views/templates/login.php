@@ -45,7 +45,7 @@
            </div>
            <div class="row">
                <div class="span12">
-                   <?php echo form_open(base_url('business/login'),array('class' => 'well form-horizontal','id' => 'login_form')); ?>
+                   <?php echo form_open(base_url('business/signin'),array('class' => 'well form-horizontal','id' => 'login_form')); ?>
                    <fieldset>
                        <legend>Login</legend>
                        <div class='control-group'>
