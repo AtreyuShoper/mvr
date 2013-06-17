@@ -355,16 +355,16 @@ function signup(){
                 $this->session->set_userdata('data_step2', $_step2);
             }
           $this->load->helper('captcha');
-          $word = 'ABCDEF';
+          $word = 'ABCD';
           $pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
           $str = '';
-          for ($i = 0; $i < 7; $i++)  {  $str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);  } $word = $str;
+          for ($i = 0; $i < 4; $i++)  {  $str .= substr($pool, mt_rand(0, strlen($pool) -1), 1);  } $word = $str;
 
           $vals = array(
             'word' => $word,
-            'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/captcha/',
+            'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/captcha/',
             'img_url'	 => base_url().'assets/captcha/',
-            'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/fonts/Capture it 2.ttf',
+            'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/fonts/PlAGuEdEaTH.ttf',
             'img_width'	 => '150',
             'img_height' => 30,
             'expiration' => 7200
@@ -421,9 +421,9 @@ function signup(){
 
             $vals = array(
               'word' => $word,
-              'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/captcha/',
+              'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/captcha/',
               'img_url'	 => base_url().'assets/captcha/',
-              'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/fonts/PlAGuEdEaTH.ttf',
+              'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/fonts/PlAGuEdEaTH.ttf',
               'img_width'	 => '150',
               'img_height' => 30,
               'expiration' => 7200
@@ -496,9 +496,9 @@ function newcaptcha(){
 
     $vals = array(
       'word' => $word,
-      'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/captcha/',
+      'img_path'	 =>  $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/captcha/',
       'img_url'	 => base_url().'assets/captcha/',
-      'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/fonts/PlAGuEdEaTH.ttf',
+      'font_path'	 => $_SERVER['DOCUMENT_ROOT'].'/instant-mvr/system/assets/business/fonts/PlAGuEdEaTH.ttf',
       'img_width'	 => '150',
       'img_height' => 30,
       'expiration' => 7200

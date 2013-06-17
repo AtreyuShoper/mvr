@@ -17,17 +17,17 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css');?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/business/css/bootstrap.min.css');?>">
         <style>
             body {
                 padding-top: 10px;
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap-responsive.min.css'); ?>">
-        <link rel="stylesheet" href="<?php echo base_url('assets/css/main.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/business/css/bootstrap-responsive.min.css'); ?>">
+        <link rel="stylesheet" href="<?php echo base_url('assets/business/css/main.css'); ?>">
 
-        <script src="<?php echo base_url('assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/business/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js'); ?>"></script>
    </head>
  
    <body>
@@ -37,7 +37,7 @@
             <div class="span12 well-small">
                 <div class="row">
                     <div class="span9">
-                        <img src="<?php echo base_url('assets/img/logo.png'); ?>" />
+                        <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
                         <h3>Business Type Account</h3>
                     </div>
                 </div>
@@ -74,12 +74,12 @@
       </div>
        </div><!--end main-container-->
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="<?php echo base_url('assets/business/js/vendor/jquery-1.9.1.min.js'); ?>"><\/script>')</script>
 
-        <script src="<?php echo base_url('assets/js/vendor/bootstrap.min.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/business/js/vendor/bootstrap.min.js'); ?>"></script>
 
-        <script src="<?php echo base_url('assets/js/plugins.js'); ?>"></script>
-        <script src="<?php echo base_url('assets/js/main.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/business/js/plugins.js'); ?>"></script>
+        <script src="<?php echo base_url('assets/business/js/main.js'); ?>"></script>
 
     <script>
         var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
