@@ -18,19 +18,6 @@ class Model_Individual extends CI_Model {
 		
 		return FALSE;
 	}
-	//SAVE BILLING INFORMATION
-	function BillingForm($form_data)
-	{
-		$this->db->insert('individual_billing', $form_data);
-		
-                
-		if ($this->db->affected_rows() == '1')
-		{
-			return TRUE;
-		}
-		
-		return FALSE;
-	}
            function get_state_dropdown()
         {
             $this->db->from('individual_states');
