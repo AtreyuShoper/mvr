@@ -95,7 +95,7 @@ class Model_Individual extends CI_Model {
                 return $query->result();
         }
         function price($id){
-                $this->db->select('state');
+                $this->db->select('price');
                 $this->db->from('individual_states');
                 $this->db->where('id', $id);
                 $query = $this->db->get();
