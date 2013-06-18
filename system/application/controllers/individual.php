@@ -312,7 +312,6 @@ class Individual extends CI_Controller {
                  $query2 = $this->model_individual->price($id['states_id']);
                  $date = date("Y-m-d\TH:i:s");
                  
-                 
                  $query = $this->model_individual->getId($id['firstname']);
                  
                     $formdata = array(
@@ -329,6 +328,7 @@ class Individual extends CI_Controller {
                     $data['order_status'] = 'Success';
                     $data['order_message'] = 'Thank you! Your order has been placed.';
                     $data['order_response'] = 'We will email you soon!';
+                    
                     $this->model_individual->SaveOrder($formdata);
                     
                     $data['title'] = 'InstantMVR - Individual Payment';
