@@ -32,7 +32,7 @@ class Individual extends CI_Controller {
                     $data['states'] = $this->model_individual->get_state_dropdown();
                     $data['title'] = 'InstantMVR - Individual';
                     $this->template->load('individual', 'individual/individual_view', $data);
-            }
+            } 
             else // passed validation proceed to post success logic
             {
                     // build array for the model
