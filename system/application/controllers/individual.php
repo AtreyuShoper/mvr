@@ -142,8 +142,8 @@ class Individual extends CI_Controller {
             $this->form_validation->set_rules('ccard_type', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
             $this->form_validation->set_rules('ccard_number', 'Credit Card Number', 'required|trim|xss_clean|min_length[16]|max_length[255]|is_numeric');			
             $this->form_validation->set_rules('exp_date', 'Expiration Date', 'required|trim|xss_clean|max_length[10]');			
-            $this->form_validation->set_rules('ccfname', 'First Name', 'required|trim|xss_clean|max_length[50]');		
-            $this->form_validation->set_rules('cclname', 'Last Name', 'required|trim|xss_clean|max_length[50]');			
+            $this->form_validation->set_rules('ccfname', 'First Name', 'required|trim|xss_clean|max_length[255]');		
+            $this->form_validation->set_rules('cclname', 'Last Name', 'required|trim|xss_clean|max_length[255]');			
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
             }
             if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -178,8 +178,11 @@ class Individual extends CI_Controller {
                     }
             }
     }
-            function verify()
+    function verify()
             {
+                $id = $this->session->userdata('step1');
+                $query = $this->model_individual->price($id['states_id']);
+                $data['price'] = $query[0]->price;
                 $data['title'] = 'InstantMVR - Individual Billing Verify';
                 $this->template->load('individual', 'individual/verification_view', $data);
             }
@@ -268,8 +271,8 @@ class Individual extends CI_Controller {
             $billing = $this->session->userdata('step3');
 
             $auth_net = array(
-                    'x_card_num'			=> $billing['credit_card_number'], // Visa
-                    'x_exp_date'			=> $billing['expiration_date'],
+                    'x_card_num'			=> $billing['ccard_number'], // Visa
+                    'x_exp_date'			=> $billing['exp_date'],
                     'x_card_code'			=> '123',
                     'x_description'			=> 'MVR transaction',
                     'x_amount'				=> $query2[0]->price,
@@ -289,14 +292,45 @@ class Individual extends CI_Controller {
 
             $this->session->set_userdata('payment', $auth_net);
             $this->authorize_net->setData($auth_net);
-
+            
+            $form_data = array_merge(
+                    $this->session->userdata('step1'),
+                    $this->session->userdata('step3')
+                
+            );
+            
+            $this->session->set_userdata('payment', $form_data);
+            
             // Try to AUTH_CAPTURE
             if( $this->authorize_net->authorizeAndCapture() )
             {
-                    $this->model_individual->SaveForm($this->session->userdata('step1') && $this->session->userdata('step3'));
+                //Save to database    
+                $this->model_individual->SaveForm($form_data);
+                
+                 $id = $this->session->userdata('step1'); 
+            
+                 $query2 = $this->model_individual->price($id['states_id']);
+                 $date = date("Y-m-d\TH:i:s");
+                 
+                 
+                 $query = $this->model_individual->getId($id['firstname']);
+                 
+                    $formdata = array(
+                        'individual_records_id' => $query[0]->id,
+                        'amount' => $query2[0]->price,  
+                        'transaction_id'    => $this->authorize_net->getTransactionId(),
+                        'approval_code'     => $this->authorize_net->getApprovalCode(), 
+                        'status' => 'Processing',
+                        'remarks' => 'OK',
+                        'entry_date' =>$date
+                        
+                    );
                     
-                    $data['trans_id'] = $this->authorize_net->getTransactionId();
-                    $data['app_code'] = $this->authorize_net->getApprovalCode();
+                    $data['order_status'] = 'Success';
+                    $data['order_message'] = 'Thank you! Your order has been placed.';
+                    $data['order_response'] = 'We will email you soon!';
+                    $this->model_individual->SaveOrder($formdata);
+                    
                     $data['title'] = 'InstantMVR - Individual Payment';
                     $this->template->load('individual', 'individual/success', $data);
             }
