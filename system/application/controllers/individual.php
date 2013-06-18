@@ -344,6 +344,110 @@ class Individual extends CI_Controller {
                     $this->authorize_net->debug();
             }
     }
+    function edit($id) {
+            $record = $this->model_individual->edit($id);
+            
+		//validate form input
+		$this->form_validation->set_rules('firstname', 'Firstname', 'required|trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('middlename', 'Middlename', 'required|trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('lastname', 'Lastname', 'required|trim|xss_clean|max_length[30]');				
+		$this->form_validation->set_rules('address1', 'Address1', 'trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('city', 'City', 'trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('states_id', 'State', 'trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('zip_code', 'Zip Code', 'trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('phone', 'Phone', 'trim|xss_clean|max_length[11]|is_numeric');			
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email|max_length[255]');			
+		$this->form_validation->set_rules('drivers_license', 'Drivers License', 'required|trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required|trim|xss_clean');
+	
+		if (isset($_POST) && !empty($_POST))
+		{		
+			$data = array(
+					       	'firstname'         =>  $this->input->post('firstname'),
+					       	'middlename'        =>  $this->input->post('middlename'),
+					       	'lastname'          =>  $this->input->post('lastname'),
+					       	'address1'          =>  $this->input->post('address1'),
+					       	'address2'          =>  $this->input->post('address2'),
+					       	'city'              =>  $this->input->post('city'),
+					       	'states_id'         =>  $this->input->post('state'),
+					       	'zip_code'          =>  $this->input->post('zip_code'),
+					       	'phone'             =>  $this->input->post('phone'),
+					       	'email'             =>  $this->input->post('email'),
+					       	'drivers_license'   =>  $this->input->post('drivers_license'),
+					       	'date_of_birth'     =>  $this->input->post('date_of_birth')
+						);
+                        
+                        $this->session->set_userdata('isloggedin', $data);
+                        
+			if ($this->form_validation->run() === true)
+			{
+				$this->driving_model->update($id, $data);
+
+				$this->session->set_flashdata('message', "<div class='mess_success'>Employee Driving Record successfully updated.</div>");
+				
+				redirect('individual/admin'.$id);
+			}			
+		}
+
+		$this->data['message'] = (validation_errors() ? validation_errors() : $this->session->flashdata('message'));
+                    
+                $this->data['record'] = $record;
+              
+		//display the edit product form
+		$this->data['firstname'] = array(
+			'name'  	=> 'firstname',
+			'value' 	=> $this->form_validation->set_value('firstname', $record['firstname']),
+		);
+                $this->data['middlename'] = array(
+			'name'  	=> 'middlename',
+			'value' 	=> $this->form_validation->set_value('middlename', $record['middlename']),
+		);
+		
+		$this->data['lastname'] = array(
+			'name'  	=> 'lastname',
+			'value' 	=> $this->form_validation->set_value('lastname', $record['lastname']),
+		);
+	
+		$this->data['address1'] = array(
+			'name'  => 'address1',
+			'value' => $this->form_validation->set_value('address1', $record['address1']),
+		);
+                $this->data['address2'] = array(
+			'name'  => 'address2',
+			'value' => $this    ->form_validation->set_value('address2', $record['address2']),
+		);
+                $this->data['city'] = array(
+			'name'  => 'city',
+			'value' => $this->form_validation->set_value('city', $record['city']),
+		);
+                $this->data['states_id'] = array(
+			'name'  => 'states_id',
+			'value' => $this->form_validation->set_value('states_id', $record['states_id']),
+		);
+                $this->data['zip_code'] = array(
+			'name'  => 'zip_code',
+			'value' => $this->form_validation->set_value('zip_code', $record['zip_code']),
+		);
+                $this->data['phone'] = array(
+			'name'  => 'phone',
+			'value' => $this->form_validation->set_value('phone', $record['phone']),
+		);
+                $this->data['email'] = array(
+			'name'  => 'email',
+			'value' => $this->form_validation->set_value('email', $record['email']),
+		);
+                $this->data['drivers_license'] = array(
+			'name'  => 'drivers_license',
+			'value' => $this->form_validation->set_value('drivers_license', $record['drivers_license']),
+		);
+                $this->data['date_of_birth'] = array(
+			'name'  => 'date_of_birth',
+			'value' => $this->form_validation->set_value('date_of_birth', $record['date_of_birth']),
+		);
+
+		$this->template->load('individual', 'individual/admin_edit', $this->data);
+	}
 }
 
 ?>
