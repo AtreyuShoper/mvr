@@ -115,11 +115,11 @@ class Individual extends CI_Controller {
                     // build array for the model
 
                     $form_data = array(
-                                            'address1' => set_value('address1'),
-                                            'address2' => set_value('address2'),
-                                            'city' => set_value('city'),
-                                            'states_id' => set_value('states_id'),
-                                            'zip_code' => set_value('zip_code')
+                                            'address1'      => set_value('address1'),
+                                            'address2'      => set_value('address2'),
+                                            'city'          => set_value('city'),
+                                            'states_id'     => set_value('states_id'),
+                                            'zip_code'      => set_value('zip_code')
                                             );
 
                     $this->session->set_userdata('usmstep2', $form_data);
@@ -139,11 +139,11 @@ class Individual extends CI_Controller {
     {	
         //print_r($_POST);
             if (isset($_POST["isbilling"])) {
-            $this->form_validation->set_rules('credit_card', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
-            $this->form_validation->set_rules('credit_card_number', 'Credit Card Number', 'required|trim|xss_clean|min_length[16]|max_length[255]|is_numeric');			
-            $this->form_validation->set_rules('expiration_date', 'Expiration Date', 'required|trim|xss_clean|max_length[10]');			
-            $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|xss_clean|max_length[50]');		
-            $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|xss_clean|max_length[50]');			
+            $this->form_validation->set_rules('ccard_type', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
+            $this->form_validation->set_rules('ccard_number', 'Credit Card Number', 'required|trim|xss_clean|min_length[16]|max_length[255]|is_numeric');			
+            $this->form_validation->set_rules('exp_date', 'Expiration Date', 'required|trim|xss_clean|max_length[10]');			
+            $this->form_validation->set_rules('ccfname', 'First Name', 'required|trim|xss_clean|max_length[50]');		
+            $this->form_validation->set_rules('cclname', 'Last Name', 'required|trim|xss_clean|max_length[50]');			
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
             }
             if ($this->form_validation->run() == FALSE) // validation hasn't been passed
