@@ -6,5 +6,5 @@
  */
 ?>
 <h1><?php echo $order_status; ?></h1>
-<h1><?php echo $order_message; ?></h1>
-<h1><?php echo $order_response; ?></h1>
+<p><?php echo $order_message; ?></p>
+<p><?php echo $order_response; ?></p>
