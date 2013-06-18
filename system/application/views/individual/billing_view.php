@@ -43,13 +43,7 @@
 
         <label for="last_name">Last Name <span class="required">*</span></label>
         <?php echo form_error('last_name'); ?>
-        <input id="last_name" type="text" name="last_name" maxlength="50" value="<?php echo set_value('last_name'); ?>"  />
-
-        <label for="suffix">Suffix</label>
-        <?php echo form_error('suffix'); ?>
-        <input id="suffix" type="text" name="suffix" maxlength="10" value="<?php echo set_value('suffix'); ?>"  />
-        
-            
+        <input id="last_name" type="text" name="last_name" maxlength="50" value="<?php echo set_value('last_name'); ?>"  />        
         <?php echo form_submit( 'submit', 'Continue'); ?>
 		
 <?php echo form_close(); ?>
