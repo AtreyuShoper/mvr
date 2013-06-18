@@ -18,6 +18,8 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Action</th>
+                                    <th colspan="2">Action</th
+                                    
                                 </tr>
                             </thead>
                             <tbody>                           
@@ -33,9 +35,10 @@
                 <td><?php echo $row->drivers_license ?></td>
                 <td><?php echo ucwords($row->state);?></td>
                 <td><i><?php echo $row->email ?></i></td>
-                <td><i>Active</i><?php //echo $row->phone ?></td>                                    
-                <td>Cancel<?php //echo anchor('driving_record/edit_record/'. $row->id .'', 'Edit')?></td>
-                
+                <td><i><?php echo $row->status ?></i></td>                                    
+                <td><?php echo $row->remarks ?></td>
+                 <td><?php echo anchor('/business/order/cart/edit/'.$items['rowid'],'Edit'); ?></td>
+                 <td><?php echo anchor('/business/order/cart/delete/'.$items['rowid'],'Delete'); ?></td>
             </tr>
  <?php
   endforeach;
