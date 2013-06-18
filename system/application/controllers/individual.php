@@ -293,8 +293,8 @@ class Individual extends CI_Controller {
             // Try to AUTH_CAPTURE
             if( $this->authorize_net->authorizeAndCapture() )
             {
-                    $this->model_individual->BillingForm($this->session->userdata('step3'));
-                    $this->model_individual->SaveForm($this->session->userdata('step1'));
+                    $this->model_individual->SaveForm($this->session->userdata('step1') && $this->session->userdata('step3'));
+                    
                     $data['trans_id'] = $this->authorize_net->getTransactionId();
                     $data['app_code'] = $this->authorize_net->getApprovalCode();
                     $data['title'] = 'InstantMVR - Individual Payment';
