@@ -30,7 +30,9 @@
 					<div class="grid_8">
 						<div class="account-container push_3 grid_2">
 							<ul>
-								<li><a href="<?php echo base_url('index.php/individual/login');?>">Login</a></li><li><a href="http://64.91.228.49/~instantm/signup.html">Sign Up</a></li>
+                                                                <?php if($this->session->userdata('login') == true)?>
+                                  
+                                                                    <li><a href="<?php echo base_url('index.php/individual/login');?>">Login</a></li><li><a href="http://64.91.228.49/~instantm/signup.html">Sign Up</a></li>
 							</ul>
 						</div>
 						<div class="search-container grid_3 push_3">
