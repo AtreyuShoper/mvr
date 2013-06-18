@@ -47,7 +47,7 @@ echo $this->session->userdata('word');
                           <option selected="selected" value="EMAIL">EMAIL</option></select>
                 </div>
             </div>	  	 
-            <div id="imgco"><?php echo $captcha; ?>&nbsp;<a onclick="getCaptchaImage()" href="javascript: void(0)"><img width="16" height="16" border="0" align="absmiddle" alt="Click To refresh the image" src="<?php echo base_url('assets/img/refresh.gif'); ?>"></a>&nbsp;
+            <div id="imgco"><?php echo $captcha; ?>&nbsp;<a onclick="getCaptchaImage()" href="javascript: void(0)"><img width="16" height="16" border="0" align="absmiddle" alt="Click To refresh the image" src="<?php echo base_url('assets/business/img/refresh.gif'); ?>"></a>&nbsp;
             <input type="text" onfocus="showdiv('captcha')" class="input" size="10" name="security_code" placeholder="Enter Code...">
             <div class="form-actions">
                 <?php echo form_hidden('step','4'); ?>
