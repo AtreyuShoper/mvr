@@ -65,14 +65,15 @@ class Model_Individual extends CI_Model {
         function information($id)
         {        
             $this->db->order_by('individual_records.firstname', 'ASC');
-            $this->db->select('individual_records.firstname,
-individual_records.lastname,
-individual_records.date_of_birth,
-individual_records.drivers_license,
-individual_states.state,
-individual_records.email,
-individual_orders.`status`,
-individual_orders.remarks');
+            $this->db->select('individual_records.id,
+                                individual_records.firstname,
+                                individual_records.lastname,
+                                individual_records.date_of_birth,
+                                individual_records.drivers_license,
+                                individual_states.state,
+                                individual_records.email,
+                                individual_orders.`status`,
+                                individual_orders.remarks');    
             $this->db->from('individual_records');
             $this->db->where('individual_records.id', $id);
             $join = 'inner';
@@ -125,6 +126,29 @@ individual_orders.remarks');
 		
 		return FALSE;
 	}
-        
+        function edit($id) {
+		$this->db->select('individual_records.id,
+                                    individual_records.firstname,
+                                    individual_records.middlename,
+                                    individual_records.lastname,
+                                    individual_records.address1,
+                                    individual_records.address2,
+                                    individual_records.city,
+                                    individual_records.states_id,
+                                    individual_records.zip_code,
+                                    individual_records.phone,
+                                    individual_records.email,
+                                    individual_records.drivers_license,
+                                    individual_records.date_of_birth');
+		$this->db->where('id', $id);
+		$query = $this->db->get('individual_records');
+
+		return $query->row_array();
+	}
+        function update($id, $data)
+	{
+		$this->db->where('id', $id);
+		$this->db->update('individual_records', $data);
+	}
 }
 ?>
