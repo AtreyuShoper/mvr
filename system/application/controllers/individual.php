@@ -142,8 +142,7 @@ class Individual extends CI_Controller {
             $this->form_validation->set_rules('credit_card', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
             $this->form_validation->set_rules('credit_card_number', 'Credit Card Number', 'required|trim|xss_clean|min_length[16]|max_length[255]|is_numeric');			
             $this->form_validation->set_rules('expiration_date', 'Expiration Date', 'required|trim|xss_clean|max_length[10]');			
-            $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|xss_clean|max_length[50]');			
-            $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|xss_clean|max_length[50]');			
+            $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|xss_clean|max_length[50]');		
             $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|xss_clean|max_length[50]');			
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
             }
@@ -157,18 +156,12 @@ class Individual extends CI_Controller {
             else // passed validation proceed to post success logic
             {
                     // build array for the model
-                    $state_id = $this->session->userdata('step1');
-                    $_price = $this->model_individual->getprice($state_id['states_id']);
-                    $_price = (array)$_price[0]; 
                     $form_data = array(
-                                            'credit_card' 			=> set_value('credit_card'),
-                                            'credit_card_number'                => set_value('credit_card_number'),
-                                            'expiration_date'                   => set_value('expiration_date'),
-                                            'first_name' 			=> set_value('first_name'),
-                                            'middle_name' 			=> set_value('middle_name'),
-                                            'last_name' 			=> set_value('last_name'),
-                                            'states_id' 			=> $state_id['states_id'],
-                                            'price'                             => $_price['price']
+                                            'ccard_type' 	=> set_value('ccard_type'),
+                                            'ccard_number'      => set_value('ccard_number'),
+                                            'exp_date'          => set_value('exp_date'),
+                                            'ccfname' 		=> set_value('ccfname'),
+                                            'cclname' 		=> set_value('cclname')          
                                             );		
 
                     $this->session->set_userdata('step3', $form_data);
