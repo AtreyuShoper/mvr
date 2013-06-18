@@ -101,9 +101,16 @@ class Model_Individual extends CI_Model {
                 $query = $this->db->get();
                 return $query->result();
         }
-        function SaveOrder($form_data)
+        function getId($id){
+                $this->db->select('individual_records.id, firstname');
+                $this->db->from('individual_records');
+                $this->db->where('id');
+                $query = $this->db->get();
+                return $query->result();
+        }
+        function SaveOrder($formdata)
 	{
-		$this->db->insert('individual_orders', $form_data);
+		$this->db->insert('individual_orders', $formdata);
 		
 		if ($this->db->affected_rows() == '1')
 		{
@@ -112,5 +119,6 @@ class Model_Individual extends CI_Model {
 		
 		return FALSE;
 	}
+        
 }
 ?>
