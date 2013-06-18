@@ -101,5 +101,16 @@ class Model_Individual extends CI_Model {
                 $query = $this->db->get();
                 return $query->result();
         }
+        function SaveOrder($form_data)
+	{
+		$this->db->insert('individual_orders', $form_data);
+		
+		if ($this->db->affected_rows() == '1')
+		{
+			return TRUE;
+		}
+		
+		return FALSE;
+	}
 }
 ?>
