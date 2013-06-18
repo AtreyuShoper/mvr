@@ -31,7 +31,7 @@
    </head>
  
    <body>
-       <div class="container span12">
+       <div class="container">
            <div class="row">
                <div class="span4 logo">
                    <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
@@ -43,9 +43,9 @@
                </div>
            </div>
            <div class="row">
-            <div class="right-container well span8">
+            
                 <?php echo $body; ?>
-            </div>
+
            </div>
        </div><!--end main-container-->
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
