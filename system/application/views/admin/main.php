@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-    <div class="span4 text-center">
+    <div class="span6 text-center">
 <?php
 echo 'test';
 ?>
