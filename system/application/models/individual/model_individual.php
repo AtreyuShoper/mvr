@@ -65,14 +65,20 @@ class Model_Individual extends CI_Model {
         function information($id)
         {        
             $this->db->order_by('individual_records.firstname', 'ASC');
-            $this->db->select('individual_records.id,individual_records.firstname,individual_records.lastname,individual_records.date_of_birth,
-                individual_records.drivers_license,individual_states.state,individual_records.email');
+            $this->db->select('individual_records.firstname,
+individual_records.lastname,
+individual_records.date_of_birth,
+individual_records.drivers_license,
+individual_states.state,
+individual_records.email,
+individual_orders.`status`,
+individual_orders.remarks');
             $this->db->from('individual_records');
-			$this->db->where('individual_records.id', $id);
+            $this->db->where('individual_records.id', $id);
             $join = 'inner';
+            $this->db->join('individual_orders', 'individual_records.id = individual_orders.individual_records_id', $join);
             $this->db->join('individual_states', 'individual_records.states_id = individual_states.id', $join);
             $query = $this->db->get();
-           // $this->db->where('id');
             return $query->result();
         }
         function getstate($id)
