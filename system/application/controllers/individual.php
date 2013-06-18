@@ -145,7 +145,6 @@ class Individual extends CI_Controller {
             $this->form_validation->set_rules('first_name', 'First Name', 'required|trim|xss_clean|max_length[50]');			
             $this->form_validation->set_rules('middle_name', 'Middle Name', 'trim|xss_clean|max_length[50]');			
             $this->form_validation->set_rules('last_name', 'Last Name', 'required|trim|xss_clean|max_length[50]');			
-            $this->form_validation->set_rules('suffix', 'Suffix', 'trim|xss_clean|max_length[10]');
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
             }
             if ($this->form_validation->run() == FALSE) // validation hasn't been passed
@@ -163,14 +162,13 @@ class Individual extends CI_Controller {
                     $_price = (array)$_price[0]; 
                     $form_data = array(
                                             'credit_card' 			=> set_value('credit_card'),
-                                            'credit_card_number'    => set_value('credit_card_number'),
-                                            'expiration_date' 		=> set_value('expiration_date'),
+                                            'credit_card_number'                => set_value('credit_card_number'),
+                                            'expiration_date'                   => set_value('expiration_date'),
                                             'first_name' 			=> set_value('first_name'),
                                             'middle_name' 			=> set_value('middle_name'),
                                             'last_name' 			=> set_value('last_name'),
-                                            'suffix' 				=> set_value('suffix'),
-                        'states_id' 			=> $state_id['states_id'],
-                        'price'                 => $_price['price']
+                                            'states_id' 			=> $state_id['states_id'],
+                                            'price'                             => $_price['price']
                                             );		
 
                     $this->session->set_userdata('step3', $form_data);
