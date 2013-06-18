@@ -18,7 +18,7 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Action</th>
-                                    <th colspan="2">Action</th
+                                    <th>Action</th
                                     
                                 </tr>
                             </thead>
@@ -26,6 +26,7 @@
                                 <?php
                                 
         foreach (
+                
                 $info as $row
                 ) :?>                 
            <tr>
@@ -37,8 +38,7 @@
                 <td><i><?php echo $row->email ?></i></td>
                 <td><i><?php echo $row->status ?></i></td>                                    
                 <td><?php echo $row->remarks ?></td>
-                 <td><?php echo anchor('/business/order/cart/edit/'.$items['rowid'],'Edit'); ?></td>
-                 <td><?php echo anchor('/business/order/cart/delete/'.$items['rowid'],'Delete'); ?></td>
+                 <td><?php echo anchor('individual/edit/'. $row->id .'','Edit'); ?></td>
             </tr>
  <?php
   endforeach;
