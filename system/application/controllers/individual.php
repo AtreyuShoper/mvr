@@ -37,19 +37,19 @@ class Individual extends CI_Controller {
             {
                     // build array for the model
                     $form_data = array(
-                            'delivery_method' 	=> set_value('delivery_method'),
+                            'delivery_method'           => set_value('delivery_method'),
                             'firstname' 		=> set_value('firstname'),
                             'middlename' 		=> set_value('middlename'),
                             'lastname' 			=> set_value('lastname'),
                             'address1' 			=> set_value('address1'),
                             'address2' 			=> set_value('address2'),
-                            'city' 				=> set_value('city'),
+                            'city' 			=> set_value('city'),
                             'states_id' 		=> set_value('states_id'),
                             'zip_code' 			=> set_value('zip_code'),
                             'phone' 			=> set_value('phone'),
                             'email' 			=> set_value('email'),
-                            'drivers_license' 	=> set_value('drivers_license'),
-                            'date_of_birth' 	=> set_value('date_of_birth')
+                            'drivers_license'           => set_value('drivers_license'),
+                            'date_of_birth'             => set_value('date_of_birth')
                             );	
 
                             $this->session->set_userdata('step1', $form_data);
@@ -263,7 +263,7 @@ class Individual extends CI_Controller {
     {
             $id = $this->session->userdata('step1'); 
             $query = $this->model_individual->state($id['states_id']);
-            
+            $query2 = $this->model_individual->price($id['states_id']);
             $info = $this->session->userdata('step1');
             $billing = $this->session->userdata('step3');
 
@@ -272,9 +272,9 @@ class Individual extends CI_Controller {
                     'x_exp_date'			=> $billing['expiration_date'],
                     'x_card_code'			=> '123',
                     'x_description'			=> 'MVR transaction',
-                    'x_amount'				=> $billing['price'],
-                    'x_first_name'			=> $billing['first_name'],
-                    'x_last_name'			=> $billing['last_name'],
+                    'x_amount'				=> $query2[0]->price,
+                    'x_first_name'			=> $billing['ccfname'],
+                    'x_last_name'			=> $billing['cclname'],
                     'x_address'				=> $info['address1'],
                     'x_city'				=> $info['city'],
                     'x_state'				=> $query[0]->state,
