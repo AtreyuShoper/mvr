@@ -11,11 +11,7 @@ if($this->session->userdata('mailmessage')){
 }
 ?>
  <p>Your request is going to come to a total cost of &#36; 
-      <?php
-      $price = $this->session->userdata('step3');
-      //$price['price'];
-      echo $price['price'];
-      ?>
+      <?php echo $price;?>
  </p>
  <?php echo form_open('individual/payment'); ?>
  <?php echo form_submit( 'submit', 'Click For Secure Payment'); ?>
