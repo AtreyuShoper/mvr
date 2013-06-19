@@ -152,7 +152,7 @@ class Individual extends CI_Controller {
         //print_r($_POST);
             if (isset($_POST["isbilling"])) {
             $this->form_validation->set_rules('ccard_type', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
-            $this->form_validation->set_rules('ccard_number', 'Credit Card Number', 'required|trim|xss_clean|min_length[16]|max_length[255]|is_numeric');			
+            $this->form_validation->set_rules('ccard_number', 'Credit Card Number', 'required|trim|xss_clean|max_length[255]|is_numeric');			
             $this->form_validation->set_rules('exp_date', 'Expiration Date', 'required|trim|xss_clean|max_length[10]');			
             $this->form_validation->set_rules('ccfname', 'First Name', 'required|trim|xss_clean|max_length[255]');		
             $this->form_validation->set_rules('cclname', 'Last Name', 'required|trim|xss_clean|max_length[255]');			
@@ -288,6 +288,9 @@ class Individual extends CI_Controller {
     }
     function payment()
     {
+        $is_logged = $this->session->userdata('login');
+        $data['is_logged_in'] = $is_logged['is_logged'];
+            
             $id = $this->session->userdata('step1'); 
             $query = $this->model_individual->state($id['states_id']);
             $query2 = $this->model_individual->price($id['states_id']);
@@ -309,7 +312,7 @@ class Individual extends CI_Controller {
                     'x_country'				=> 'US',
                     'x_phone'				=> $info['phone'],
                     'x_email'				=> $info['email'],
-                    'x_customer_ip'			=> $this->input->ip_address(),
+                    'x_customer_ip'			=> $this->input->ip_address()
                     );
 
 
@@ -320,7 +323,6 @@ class Individual extends CI_Controller {
             $form_data = array_merge(
                     $this->session->userdata('step1'),
                     $this->session->userdata('step3')
-                
             );
             
             $this->session->set_userdata('payment', $form_data);
@@ -335,8 +337,6 @@ class Individual extends CI_Controller {
             
                  $query2 = $this->model_individual->price($id['states_id']);
                  
-                 $date = date('Y-m-d H:i:s');
-                 
                  $query = $this->model_individual->getId($id['firstname']);
                  
                     $formdata = array(
@@ -345,8 +345,7 @@ class Individual extends CI_Controller {
                         'transaction_id'    => $this->authorize_net->getTransactionId(),
                         'approval_code'     => $this->authorize_net->getApprovalCode(), 
                         'status' => 'Processing',
-                        'remarks' => 'OK',
-                        'entry_date' =>$date
+                        'remarks' => 'OK'
                         
                     );
                     
