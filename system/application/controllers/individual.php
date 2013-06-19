@@ -11,7 +11,10 @@ class Individual extends CI_Controller {
             $this->load->library('authorize_net');
     }	
     function index()
-    {			
+    {		
+            $is_logged = $this->session->userdata('login');
+            $data['is_logged_in'] = $is_logged['is_logged'];
+                
             $this->form_validation->set_rules('delivery_method', 'Delivery Method', 'required|trim|xss_clean|max_length[10]');			
             $this->form_validation->set_rules('firstname', 'Firstname', 'required|trim|xss_clean|max_length[50]');			
             $this->form_validation->set_rules('middlename', 'Middlename', 'trim|xss_clean|max_length[50]');			
@@ -66,7 +69,9 @@ class Individual extends CI_Controller {
     }
     function emailconfirm()
     {	
-
+            $is_logged = $this->session->userdata('login');
+            $data['is_logged_in'] = $is_logged['is_logged'];
+                
             $this->form_validation->set_rules('email', 'Email', 'trim|xss_clean|valid_email|max_length[255]');
 
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
@@ -97,7 +102,10 @@ class Individual extends CI_Controller {
             }
     }
     function usmailconfirm()
-    {			
+    {	
+            $is_logged = $this->session->userdata('login');
+            $data['is_logged_in'] = $is_logged['is_logged'];
+                
             $this->form_validation->set_rules('address1', 'Address1', 'trim|xss_clean|max_length[255]');			
             $this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[255]');			
             $this->form_validation->set_rules('city', 'City', 'trim|xss_clean|max_length[30]');			
@@ -138,6 +146,9 @@ class Individual extends CI_Controller {
     }
     function billing()
     {	
+        $is_logged = $this->session->userdata('login');
+        $data['is_logged_in'] = $is_logged['is_logged'];
+                
         //print_r($_POST);
             if (isset($_POST["isbilling"])) {
             $this->form_validation->set_rules('ccard_type', 'Credit Card', 'required|trim|xss_clean|max_length[40]');			
@@ -181,6 +192,10 @@ class Individual extends CI_Controller {
     }
     function verify()
             {
+                $is_logged = $this->session->userdata('login');
+                $data['is_logged_in'] = $is_logged['is_logged'];
+                
+                
                 $id = $this->session->userdata('step1');
                 $query = $this->model_individual->price($id['states_id']);
                 $data['price'] = $query[0]->price;
@@ -189,6 +204,9 @@ class Individual extends CI_Controller {
             }
     function login()
     {
+        $is_logged = $this->session->userdata('login');
+        $data['is_logged_in'] = $is_logged['is_logged'];
+        
         $this->session->unset_userdata('errormessage');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|trim|xss_clean');	
         $this->form_validation->set_rules('drivers_license', 'Driver License Number', 'required|trim|xss_clean');
@@ -216,7 +234,7 @@ class Individual extends CI_Controller {
                             $email          = $this->input->post('email');
                             $lic_num        = $this->input->post('drivers_license');
                             $date_of_birth  = $this->input->post('date_of_birth');
-
+                            
                             $data['query'] = $this->model_individual->indlogin($email, $lic_num, $date_of_birth);
                             if($data['query'] != 0)
                             {
@@ -224,14 +242,17 @@ class Individual extends CI_Controller {
                                             'email'             => $data['query']['email'],
                                             'drivers_license'   => $data['query']['drivers_license'],
                                             'date_of_birth'     => $data['query']['date_of_birth'],
-                                            'id'                => $data['query']['id']
+                                            'id'                => $data['query']['id'],
+                                            'is_logged'         => TRUE
                                             );
-
 
                                     //$ci = & get_instance();
                                     $this->session->set_userdata('login', $form_data);
-
-                                    redirect('individual/admin');
+                                        
+                                    
+                                    
+                                    //$this->template->load('individual', 'individual/admin_view', $data);
+                                   redirect('individual/admin', $data);
 
                             }
                     }
@@ -257,7 +278,9 @@ class Individual extends CI_Controller {
     function admin()
     {	
         $id = $this->session->userdata('login');
-
+        $is_logged = $this->session->userdata('login');
+        $data['is_logged_in'] = $is_logged['is_logged'];
+                                    
         $record = $this->model_individual->information($id['id']);
         $data['info'] = $record;
         $data['title'] = 'InstantMVR - Individual Admin';
@@ -346,7 +369,8 @@ class Individual extends CI_Controller {
                     $this->authorize_net->debug();
             }
     }
-    function edit($id) {
+    function edit($id) 
+    {
             
             $record = $this->model_individual->edit($id);
             
@@ -449,6 +473,7 @@ class Individual extends CI_Controller {
 			'value' => $this->form_validation->set_value('date_of_birth', $record['date_of_birth']),
 		);
                
+                
                 $this->session->set_userdata('edit', $this->data);
                 
                 $value = $this->session->userdata('edit');
@@ -456,12 +481,18 @@ class Individual extends CI_Controller {
                 $query1 = $this->model_individual->state($id['states_id']);
                 $statename = $query1[0]->state;
                 $this->data['states'] = $this->model_individual->statedropdown($id, $statename);
-               
+                
+                $is_logged = $this->session->userdata('login');
+                $this->data['is_logged_in'] = $is_logged['is_logged'];
+                
                 $this->data['title'] = 'Individual Records Edit';
 		$this->template->load('individual', 'individual/admin_edit', $this->data);
 	}
         function profile()
         {
+            $is_logged = $this->session->userdata('login');
+            $data['is_logged_in'] = $is_logged['is_logged'];
+            
          $id = $this->session->userdata('login');
 
         $result = $this->model_individual->getRecord($id['id']);
