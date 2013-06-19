@@ -5,8 +5,18 @@
  * and open the template in the editor.
  */
 ?>
-
-
+                        
+                        <?php 
+                        $date = date(DATE_COOKIE);
+                        $username = $this->session->userdata('login');
+                        //print_r($username);
+                        foreach($info as $row):
+                            $fname = $row->firstname;
+                        ?>
+                            
+                        <p>Welcome <?php echo anchor('/individual/profile/', $fname); ?> <?php echo $date; ?></p>
+                            <?php endforeach;?>
+                        
                         <table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="admin">
                             <thead>
                                 <tr>
@@ -17,9 +27,7 @@
                                     <th>State</th>
                                     <th>Email</th>
                                     <th>Status</th>
-                                    <th>Action</th>
-                                    <th>Action</th
-                                    
+                                    <th>Remarks</th> 
                                 </tr>
                             </thead>
                             <tbody>                           
@@ -38,7 +46,6 @@
                 <td><i><?php echo $row->email ?></i></td>
                 <td><i><?php echo $row->status ?></i></td>                                    
                 <td><?php echo $row->remarks ?></td>
-                 <td><?php echo anchor('individual/edit/'. $row->id .'','Edit'); ?></td>
             </tr>
  <?php
   endforeach;
