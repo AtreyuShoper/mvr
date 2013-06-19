@@ -5,8 +5,9 @@
  * and open the template in the editor.
  */
 ?>
-
+<h1>Personal Information</h1>
 <?php foreach ($info as $row): ?>
+
 <table width="411" border="1">
   <tr>
     <td width="112">First Name</td>
@@ -51,7 +52,7 @@
   <tr>
     <td>Email</td>
     <td>&nbsp;</td>
-    <td><?php echo ucwords($row->email); ?></td>
+    <td><?php echo $row->email; ?></td>
   </tr>
   <tr>
     <td>Drivers License</td>
@@ -64,5 +65,12 @@
     <td><?php echo ucwords($row->date_of_birth); ?></td>
   </tr>
 </table>
- <?php echo anchor('/individual/edit/'.$row->id,'Edit'); ?>
+<div width="50%" style="display: block;">
+    <div style="float: left;">
+        <?php echo anchor('/individual/admin', '&larr; Back'); ?>
+    </div> 
+    <div style="float: left; margin-left: 150px;">
+        <?php echo anchor('/individual/edit/'.$row->id,'Edit Profile &rarr;'); ?>
+    </div>
+</div>
 <?php endforeach; ?>
