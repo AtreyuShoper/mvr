@@ -21,7 +21,7 @@
 <label>City</label>
         <?php echo form_input($city); ?>
 <label>State</label>
-        <?php echo form_input($states_id); ?>
+        <?php echo form_input($states_id);?>
 <label>Zip Code</label>
         <?php echo form_input($zip_code); ?>
 <label>Phone</label>
