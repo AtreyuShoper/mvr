@@ -29,12 +29,16 @@
 					</div>
 					<div class="grid_8">
 						<div class="account-container push_3 grid_2">
-							<ul>
-                                                                <?php if($this->session->userdata('login') == true)?>
-                                  
-                                                                    <li><a href="<?php echo base_url('index.php/individual/login');?>">Login</a></li><li><a href="http://64.91.228.49/~instantm/signup.html">Sign Up</a></li>
-							</ul>
-						</div>
+						<ul>
+                                                    <?php if($is_logged_in == 1): ?>
+                                                    <li><a href="<?php echo base_url('index.php/individual/logout');?>">Logout</a></li>
+                                                    <?php else: ?>
+                                                    <li><a href="<?php echo base_url('index.php/individual/login');?>">Login</a></li>
+                                                    <?php endif; ?>
+                                                    <li><a href="http://64.91.228.49/~instantm/signup.html">Sign Up</a></li>
+                                                    
+                                                </ul>
+                                                </div>
 						<div class="search-container grid_3 push_3">
 							<form>
 								<input class="search2" type="text" name="search" placeholder="Search MVR">
