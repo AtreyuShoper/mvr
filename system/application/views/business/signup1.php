@@ -14,7 +14,7 @@
             <div class="control-group"> 
             <label class="control-label" for="business_account">Choose a username: </label>
                 <div class="controls"> 
-                    <input type="text" class="input" id="business_account" name="business_account" size="25" maxlength="10" value="<?php set_value('business_account'); ?>">
+                    <input type="text" class="input" id="business_account" name="business_account" size="25" maxlength="10" value="<?php echo set_value('business_account'); ?>">
                     <span class="help-block">(up to 10 digits)</span>
                 </div>
             </div>
