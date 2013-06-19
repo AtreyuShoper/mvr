@@ -7,6 +7,6 @@
 ?>
     <div class="span6 text-center">
 <?php
-echo 'test';
+print_r($orders);
 ?>
     </div>
