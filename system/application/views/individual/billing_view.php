@@ -26,7 +26,7 @@
         <br /><?php echo form_dropdown('ccard_type', $options, set_value('ccard_type'))?>
 
         <label for="ccard_number">Credit Card Number <span class="required">*</span></label>
-        <?php echo form_error('cccard_number'); ?>
+        <?php echo form_error('ccard_number'); ?>
         <input id="ccard_number" type="text" name="ccard_number" maxlength="255" value="<?php echo set_value('ccard_number'); ?>"  />
 
         <label for="exp_date">Expiration Date <span class="required">*</span></label>
