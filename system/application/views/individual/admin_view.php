@@ -7,7 +7,9 @@
 ?>
                         
                         <?php 
-                        $date = date(DATE_COOKIE);
+                        date_default_timezone_set('Asia/Singapore');
+                        $date = date("l F j, Y, g:i a");
+                                //date(DATE_COOKIE);
                         $username = $this->session->userdata('login');
                         //print_r($username);
                         foreach($info as $row):
