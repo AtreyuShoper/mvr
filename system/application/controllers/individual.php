@@ -312,7 +312,7 @@ class Individual extends CI_Controller {
             
                  $query2 = $this->model_individual->price($id['states_id']);
                  
-                 $date = date("Y-m-d\TH:i:s");
+                 $date = date('Y-m-d H:i:s');
                  
                  $query = $this->model_individual->getId($id['firstname']);
                  
@@ -354,12 +354,12 @@ class Individual extends CI_Controller {
 		$this->form_validation->set_rules('firstname', 'Firstname', 'required|trim|xss_clean|max_length[30]');			
 		$this->form_validation->set_rules('middlename', 'Middlename', 'trim|xss_clean|max_length[30]');			
 		$this->form_validation->set_rules('lastname', 'Lastname', 'required|trim|xss_clean|max_length[30]');				
-		$this->form_validation->set_rules('address1', 'Address1', 'trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('address1', 'Address1', 'required|trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[128]');			
-		$this->form_validation->set_rules('city', 'City', 'trim|xss_clean|max_length[128]');			
-		$this->form_validation->set_rules('states_id', 'State', 'trim|xss_clean|max_length[128]');			
-		$this->form_validation->set_rules('zip_code', 'Zip Code', 'trim|xss_clean|max_length[30]');			
-		$this->form_validation->set_rules('phone', 'Phone', 'trim|xss_clean|max_length[12]');			
+		$this->form_validation->set_rules('city', 'City', 'required|trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('states_id', 'State', 'required|trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('zip_code', 'Zip Code', 'required|trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('phone', 'Phone', 'required|trim|xss_clean|max_length[12]');			
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email|max_length[255]');			
 		$this->form_validation->set_rules('drivers_license', 'Drivers License', 'required|trim|xss_clean|max_length[30]');			
 		$this->form_validation->set_rules('date_of_birth', 'Date of Birth', 'required|trim|xss_clean');
@@ -381,8 +381,6 @@ class Individual extends CI_Controller {
 					       	'date_of_birth'     =>  $this->input->post('date_of_birth')
 						);
                         
-                        $this->session->set_userdata('isloggedin', $data);
-                        
 			if ($this->form_validation->run() === true)
 			{
                                
@@ -390,7 +388,7 @@ class Individual extends CI_Controller {
 
 				$this->session->set_flashdata('message', "<div class='mess_success'>Employee Driving Record successfully updated.</div>");
 				
-				redirect('individual/profile/'.$id);
+				redirect('individual/profile/');
 			}			
 		}
 
@@ -427,6 +425,7 @@ class Individual extends CI_Controller {
 		);
                 $this->data['states_id'] = array(
 			'name'  => 'states_id',
+                        'type'  => 'hidden',
 			'value' => $this->form_validation->set_value('states_id', $record['states_id']),
 		);
                 $this->data['zip_code'] = array(
@@ -449,7 +448,15 @@ class Individual extends CI_Controller {
 			'name'  => 'date_of_birth',
 			'value' => $this->form_validation->set_value('date_of_birth', $record['date_of_birth']),
 		);
-                $this->data['states'] = $this->model_individual->get_state_dropdown();
+               
+                $this->session->set_userdata('edit', $this->data);
+                
+                $value = $this->session->userdata('edit');
+                $id =  $value['states_id']['value'];
+                $query1 = $this->model_individual->state($id['states_id']);
+                $statename = $query1[0]->state;
+                $this->data['states'] = $this->model_individual->statedropdown($id, $statename);
+               
                 $this->data['title'] = 'Individual Records Edit';
 		$this->template->load('individual', 'individual/admin_edit', $this->data);
 	}
