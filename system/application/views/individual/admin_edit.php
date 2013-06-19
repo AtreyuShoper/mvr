@@ -6,7 +6,8 @@
  */
 ?>
 <?php $id = $record['id']; ?>
-    <?php echo form_open("individual/edit_record/$id");?>
+<?php echo validation_errors('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>'); ?>
+    <?php echo form_open("individual/edit/$id");?>
 <label>Firstname</label>
         <?php echo form_input($firstname); ?>
 <label>Middlename</label>
