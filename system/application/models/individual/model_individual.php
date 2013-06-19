@@ -174,6 +174,20 @@ class Model_Individual extends CI_Model {
             $query = $this->db->get();
             return $query->result();
         }
+            function statedropdown($id, $statename)
+        {
+            $this->db->from('individual_states');
+            $this->db->order_by('id');
+            $result = $this->db->get();
+            $return = array();
+            if($result->num_rows() > 0){
+            $return[$id] = $statename;
+             foreach($result->result_array() as $row){
+            $return[$row['id']] = ucwords($row['state']);
+            }
+        }
+            return $return;
+        }
        
 }
 ?>
