@@ -385,6 +385,7 @@ class Individual extends CI_Controller {
                         
 			if ($this->form_validation->run() === true)
 			{
+                               
 				$this->model_individual->update($id, $data);
 
 				$this->session->set_flashdata('message', "<div class='mess_success'>Employee Driving Record successfully updated.</div>");
@@ -448,6 +449,7 @@ class Individual extends CI_Controller {
 			'name'  => 'date_of_birth',
 			'value' => $this->form_validation->set_value('date_of_birth', $record['date_of_birth']),
 		);
+                $this->data['states'] = $this->model_individual->get_state_dropdown();
                 $this->data['title'] = 'Individual Records Edit';
 		$this->template->load('individual', 'individual/admin_edit', $this->data);
 	}
