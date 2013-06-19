@@ -64,7 +64,7 @@ class Model_Individual extends CI_Model {
 	}
         function information($id)
         {        
-            $this->db->order_by('individual_records.firstname', 'ASC');
+            //$this->db->order_by('individual_records.firstname', 'ASC');
             $this->db->select('individual_records.id,
                                 individual_records.firstname,
                                 individual_records.lastname,
@@ -147,8 +147,32 @@ class Model_Individual extends CI_Model {
 	}
         function update($id, $data)
 	{
+            
 		$this->db->where('id', $id);
 		$this->db->update('individual_records', $data);
 	}
+        function getRecord($id)
+        {
+            //$this->db->order_by('individual_records.firstname', 'ASC');
+            $this->db->select(' individual_records.id,
+                                individual_records.firstname,
+                                individual_records.middlename,
+                                individual_records.lastname,
+                                individual_records.address1,
+                                individual_records.address2,
+                                individual_records.city,
+                                individual_states.state,
+                                individual_records.zip_code,
+                                individual_records.phone,
+                                individual_records.email,
+                                individual_records.drivers_license,
+                                individual_records.date_of_birth');    
+            $this->db->from('individual_records');
+            $this->db->where('individual_records.id', $id);
+            $join = 'inner';
+            $this->db->join('individual_states', 'individual_records.states_id = individual_states.id', $join);
+            $query = $this->db->get();
+            return $query->result();
+        }
 }
 ?>
