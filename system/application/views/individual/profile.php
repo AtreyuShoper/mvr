@@ -67,7 +67,7 @@
 </table>
 <div width="50%" style="display: block;">
     <div style="float: left;">
-        <?php echo anchor('/individual/admin', '&larr; Back'); ?>
+        <?php echo anchor('/individual/admin', '&larr; Back to Main'); ?>
     </div> 
     <div style="float: left; margin-left: 150px;">
         <?php echo anchor('/individual/edit/'.$row->id,'Edit Profile &rarr;'); ?>
