@@ -76,7 +76,7 @@ margin-top:-32767px;/* thank you Erik J - negate effect of float*/
 	color: #0097D0;
 }
 .account-container ul li:first-child a {
-	border-right: 1px solid #fff;
+	/*border-right: 1px solid #fff;*/
 }
 .account-container ul li:last-child a {
 	border-left: 1px solid #fff;
@@ -592,7 +592,7 @@ span.error, span.required{
 	
 }
 ul{
-	width: 100%;
+	width: 105%;
 }
 ul li{
 	display:inline-block;
