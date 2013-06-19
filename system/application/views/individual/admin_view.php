@@ -14,10 +14,10 @@
                             $fname = $row->firstname;
                         ?>
                             
-                        <p>Welcome <?php echo anchor('/individual/profile/', $fname); ?> <?php echo $date; ?></p>
+                        <p>Welcome <?php echo anchor('/individual/profile/', ucwords($fname)); ?> <?php echo $date; ?></p>
                             <?php endforeach;?>
                         
-                        <table cellpadding="0" cellspacing="0" border="0" class="bordered-table zebra-striped" id="admin">
+                        <table cellpadding="0" cellspacing="0" border="1" class="">
                             <thead>
                                 <tr>
                                     <th>First</th>
@@ -31,21 +31,19 @@
                                 </tr>
                             </thead>
                             <tbody>                           
-                                <?php
-                                
-        foreach (
-                
+                                <?php         
+        foreach (   
                 $info as $row
                 ) :?>                 
-           <tr>
-                <td><?php echo ucwords($row->firstname);?></td>
-                <td><?php echo ucwords($row->lastname);?></td>
-                <td><?php echo $row->date_of_birth ?></td>
-                <td><?php echo $row->drivers_license ?></td>
-                <td><?php echo ucwords($row->state);?></td>
-                <td><i><?php echo $row->email ?></i></td>
-                <td><i><?php echo $row->status ?></i></td>                                    
-                <td><?php echo $row->remarks ?></td>
+           <tr style="text-align: right">
+                <td width="10%"><?php echo ucwords($row->firstname);?></td>
+                <td width="10%"><?php echo ucwords($row->lastname);?></td>
+                <td width="10%"><?php echo $row->date_of_birth ?></td>
+                <td width="20%"><?php echo $row->drivers_license ?></td>
+                <td width="10%"><?php echo ucwords($row->state);?></td>
+                <td width="20%"><i><?php echo $row->email ?></i></td>
+                <td width="10%"><i><?php echo $row->status ?></i></td>                                    
+                <td width="10%"><?php echo $row->remarks ?></td>
             </tr>
  <?php
   endforeach;
