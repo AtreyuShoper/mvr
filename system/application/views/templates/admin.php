@@ -31,7 +31,7 @@
    </head>
  
    <body>
-       <div class="container span12">
+       <div class="container">
            <div class="row">
                <div class="span4 logo">
                    <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
@@ -43,7 +43,7 @@
                </div>
            </div>
            <div class="row">
-            <div class="right-container well span8">
+            <div class="rspan12">
                 <?php echo $body; ?>
             </div>
            </div>

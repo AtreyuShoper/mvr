@@ -17,18 +17,20 @@ class model_orders extends CI_Model{
     public $amount;
     public $transaction_id;
     public $approval_code;
+    public $status;
+    public $remarks;
     function __construct() {
         parent::__construct();
     }
     function getAll(){
-        return $this->db->get('business_ordered')->result();
+        return $this->db->get('business_orders')->result();
     }
     function getByBusinessAccount($account_id){
-    $query = $this->db->get_where('business_ordered', array('business_account_id' => $account_id));
+    $query = $this->db->get_where('business_orders', array('business_account_id' => $account_id));
     return $query->result();
     }
     private function insert(){
-    $this->db->insert('business_ordered', $this);
+    $this->db->insert('business_orders', $this);
     return $this->db->insert_id();
     }
     private function update(){
@@ -36,12 +38,13 @@ class model_orders extends CI_Model{
     $this->db->set('amount', $this->amount);
     $this->db->set('transaction_id', $this->transaction_id);
     $this->db->set('approval_code', $this->approval_code);
+    $this->db->set('status', 'Processing');
     $this->db->where('id', $this->id);
-    return $this->db->update('business_ordered');
+    return $this->db->update('business_orders');
     }
     public function delete(){
     $this->db->where('id', $this->id);
-    return $this->db->delete('business_ordered');
+    return $this->db->delete('business_orders');
     }
     public function save(){
         if (isset($this->id)) {  

@@ -110,6 +110,7 @@ function order(){
                         $order->amount = $autho_net['x_amount'];
                         $order->transaction_id = $this->authorize_net->getTransactionId();
                         $order->approval_code = $this->authorize_net->getApprovalCode();
+                        $order->status = 'Processing';
                         $_order_id = $order->save();
                         $this->load->model('business/model_employees');
                         $employee = new model_employees();

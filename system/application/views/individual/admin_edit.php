@@ -35,8 +35,8 @@
  <?php echo form_error('states_id'); ?>
         <?php echo form_input($states_id);?>
         <?php 
-             $selected_state = $this->input->post('states_id');
-             echo form_dropdown('states_id', $states, $selected_state);
+             $selected_state = $this->input->post('state_id');
+             echo form_dropdown('state_id', $states, $selected_state);
         ?>
 
 <label>Zip Code</label>

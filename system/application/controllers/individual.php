@@ -48,7 +48,7 @@ class Individual extends CI_Controller {
                             'address1' 			=> set_value('address1'),
                             'address2' 			=> set_value('address2'),
                             'city' 			=> set_value('city'),
-                            'states_id' 		=> set_value('states_id'),
+                            'state_id'                  => set_value('state_id'),
                             'zip_code' 			=> set_value('zip_code'),
                             'phone' 			=> set_value('phone'),
                             'email' 			=> set_value('email'),
@@ -109,7 +109,7 @@ class Individual extends CI_Controller {
             $this->form_validation->set_rules('address1', 'Address1', 'trim|xss_clean|max_length[255]');			
             $this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[255]');			
             $this->form_validation->set_rules('city', 'City', 'trim|xss_clean|max_length[30]');			
-            $this->form_validation->set_rules('states_id', 'States_id', 'trim|xss_clean|max_length[50]');			
+            $this->form_validation->set_rules('state_id', 'State_id', 'trim|xss_clean|max_length[50]');			
             $this->form_validation->set_rules('zip_code', 'Zip Code', 'trim|xss_clean|max_length[30]');
 
             $this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
@@ -127,7 +127,7 @@ class Individual extends CI_Controller {
                                             'address1'      => set_value('address1'),
                                             'address2'      => set_value('address2'),
                                             'city'          => set_value('city'),
-                                            'states_id'     => set_value('states_id'),
+                                            'state_id'      => set_value('state_id'),
                                             'zip_code'      => set_value('zip_code')
                                             );
 
@@ -335,7 +335,7 @@ class Individual extends CI_Controller {
                 
                  $id = $this->session->userdata('step1'); 
             
-                 $query2 = $this->model_individual->price($id['states_id']);
+                 $query2 = $this->model_individual->price($id['state_id']);
                  
                  $query = $this->model_individual->getId($id['firstname']);
                  
@@ -380,7 +380,7 @@ class Individual extends CI_Controller {
 		$this->form_validation->set_rules('address1', 'Address1', 'required|trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('city', 'City', 'required|trim|xss_clean|max_length[128]');			
-		$this->form_validation->set_rules('states_id', 'State', 'required|trim|xss_clean|max_length[128]');			
+		$this->form_validation->set_rules('state_id', 'State', 'required|trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('zip_code', 'Zip Code', 'required|trim|xss_clean|max_length[30]');			
 		$this->form_validation->set_rules('phone', 'Phone', 'required|trim|xss_clean|max_length[12]');			
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|xss_clean|valid_email|max_length[255]');			
@@ -396,7 +396,7 @@ class Individual extends CI_Controller {
 					       	'address1'          =>  $this->input->post('address1'),
 					       	'address2'          =>  $this->input->post('address2'),
 					       	'city'              =>  $this->input->post('city'),
-					       	'states_id'         =>  $this->input->post('states_id'),
+					       	'state_id'          =>  $this->input->post('state_id'),
 					       	'zip_code'          =>  $this->input->post('zip_code'),
 					       	'phone'             =>  $this->input->post('phone'),
 					       	'email'             =>  $this->input->post('email'),

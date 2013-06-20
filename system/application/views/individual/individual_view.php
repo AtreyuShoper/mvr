@@ -41,12 +41,12 @@
         <?php echo form_error('city'); ?>                    
                         <input id="city" type="text" name="city" maxlength="255" value="<?php echo set_value('city'); ?>"  />
                         
-                        <label for="states_id">State<span class="required">*</span></label>
-        <?php echo form_error('states_id'); ?>
+                        <label for="state_id">State<span class="required">*</span></label>
+        <?php echo form_error('state_id'); ?>
                         
                         <?php 
-                        $selected_state = $this->input->post('states_id');
-                        echo form_dropdown('states_id', $states, $selected_state);  ?>
+                        $selected_state = $this->input->post('state_id');
+                        echo form_dropdown('state_id', $states, $selected_state);  ?>
                         
                         <label for="zip_code">Zip Code<span class="required">*</span></label>
         <?php echo form_error('zip_code'); ?>

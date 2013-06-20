@@ -78,13 +78,13 @@ class Model_Individual extends CI_Model {
             $this->db->where('individual_records.id', $id);
             $join = 'inner';
             $this->db->join('individual_orders', 'individual_records.id = individual_orders.individual_records_id', $join);
-            $this->db->join('individual_states', 'individual_records.states_id = individual_states.id', $join);
+            $this->db->join('individual_states', 'individual_records.state_id = individual_state.id', $join);
             $query = $this->db->get();
             return $query->result();
         }
         function getstate($id)
         {
-            $this->db->select('id, states_id');
+            $this->db->select('id, state_id');
               $this->db->where('id', $id);
 		$query = $this->db->get('individual_records');
 
@@ -134,7 +134,7 @@ class Model_Individual extends CI_Model {
                                     individual_records.address1,
                                     individual_records.address2,
                                     individual_records.city,
-                                    individual_records.states_id,
+                                    individual_records.state_id,
                                     individual_records.zip_code,
                                     individual_records.phone,
                                     individual_records.email,
@@ -170,11 +170,11 @@ class Model_Individual extends CI_Model {
             $this->db->from('individual_records');
             $this->db->where('individual_records.id', $id);
             $join = 'inner';
-            $this->db->join('individual_states', 'individual_records.states_id = individual_states.id', $join);
+            $this->db->join('individual_states', 'individual_records.state_id = individual_state.id', $join);
             $query = $this->db->get();
             return $query->result();
         }
-            function statedropdown($id, $statename)
+function statedropdown($id, $statename)
         {
             $this->db->from('individual_states');
             $this->db->order_by('id');
