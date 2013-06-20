@@ -47,9 +47,7 @@
                </div>
            </div>
            <div class="row">
-            <div class="span12">
                 <?php echo $body; ?>
-            </div>
            </div>
        </div><!--end main-container-->
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
