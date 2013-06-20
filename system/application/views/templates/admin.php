@@ -43,7 +43,7 @@
                </div>
            </div>
            <div class="row">
-            <div class="rspan12">
+            <div class="span12">
                 <?php echo $body; ?>
             </div>
            </div>

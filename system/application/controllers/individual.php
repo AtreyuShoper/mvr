@@ -331,17 +331,10 @@ class Individual extends CI_Controller {
             if( $this->authorize_net->authorizeAndCapture() )
             {
                 //Save to database    
-                $this->model_individual->SaveForm($form_data);
-                
-                 $id = $this->session->userdata('step1'); 
-            
-                 $query2 = $this->model_individual->price($id['state_id']);
-                 
-                 $query = $this->model_individual->getId($id['firstname']);
-                 
+                $individual_id = $this->model_individual->SaveForm($form_data);                 
                     $formdata = array(
-                        'individual_records_id' => $query[0]->id,
-                        'amount' => $query2[0]->price,  
+                        'individual_record_id' => $individual_id,
+                        'amount' => price($id['state_id']),  
                         'transaction_id'    => $this->authorize_net->getTransactionId(),
                         'approval_code'     => $this->authorize_net->getApprovalCode(), 
                         'status' => 'Processing',
@@ -374,9 +367,9 @@ class Individual extends CI_Controller {
             $record = $this->model_individual->edit($id);
             
 		//validate form input
-		$this->form_validation->set_rules('firstname', 'Firstname', 'required|trim|xss_clean|max_length[30]');			
-		$this->form_validation->set_rules('middlename', 'Middlename', 'trim|xss_clean|max_length[30]');			
-		$this->form_validation->set_rules('lastname', 'Lastname', 'required|trim|xss_clean|max_length[30]');				
+		$this->form_validation->set_rules('first_name', 'Firstname', 'required|trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('middle_name', 'Middlename', 'trim|xss_clean|max_length[30]');			
+		$this->form_validation->set_rules('last_name', 'Lastname', 'required|trim|xss_clean|max_length[30]');				
 		$this->form_validation->set_rules('address1', 'Address1', 'required|trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('address2', 'Address2', 'trim|xss_clean|max_length[128]');			
 		$this->form_validation->set_rules('city', 'City', 'required|trim|xss_clean|max_length[128]');			
@@ -390,9 +383,9 @@ class Individual extends CI_Controller {
 		if (isset($_POST) && !empty($_POST))
 		{		
 			$data = array(
-					       	'firstname'         =>  $this->input->post('firstname'),
-					       	'middlename'        =>  $this->input->post('middlename'),
-					       	'lastname'          =>  $this->input->post('lastname'),
+					       	'firstname'         =>  $this->input->post('first_name'),
+					       	'middlename'        =>  $this->input->post('middle_name'),
+					       	'lastname'          =>  $this->input->post('last_name'),
 					       	'address1'          =>  $this->input->post('address1'),
 					       	'address2'          =>  $this->input->post('address2'),
 					       	'city'              =>  $this->input->post('city'),

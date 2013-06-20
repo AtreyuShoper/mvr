@@ -29,7 +29,7 @@
                     <td><?php echo $employee->state; ?></td>
                     <td><?php echo $employee->license_number; ?></td>
                     <td><?php echo $employee->date_of_birth; ?></td>
-                    <td><?php echo $employee->status; ?></td>
+                    <td><?php echo $employee->estatus; ?></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>

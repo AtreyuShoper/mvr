@@ -111,5 +111,8 @@ form#business_order_checkout1 input[type='checkbox']{
     vertical-align: top;
     margin-right: 5px;
 }
+.error-color{
+    color:red;
+}
 
 

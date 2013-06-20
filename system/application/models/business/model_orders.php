@@ -33,6 +33,7 @@ class model_orders extends CI_Model{
     $this->db->insert('business_orders', $this);
     return $this->db->insert_id();
     }
+    
     private function update(){
     $this->db->set('business_account_id', $this->business_account_id);
     $this->db->set('amount', $this->amount);
@@ -41,6 +42,10 @@ class model_orders extends CI_Model{
     $this->db->set('status', 'Processing');
     $this->db->where('id', $this->id);
     return $this->db->update('business_orders');
+    }
+    public function selectUpdate($id, $data){
+        $this->db->where('id', $id);
+        return $this->db->update('business_orders', $data);
     }
     public function delete(){
     $this->db->where('id', $this->id);

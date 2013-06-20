@@ -5,10 +5,12 @@
  * and open the template in the editor.
  */
 ?>
+<div class="well">
+<h2 class="well-small">Recent Orders</h2>
 <table class="table table-striped table-hover well">
     <thead>
-        <tr>
-            <th></th>
+        <tr style="background: #0064cd">
+            <th>Transaction ID</th>
             <th>Order Type</th>
             <th>First Name</th>
             <th>Middle Name</th>
@@ -21,15 +23,20 @@
         </tr>
     </thead>
     <tbody>
+        <?php $error_orders = array(); ?>
         <?php foreach ($orders as $order): ?>
+        <?php
+            if(strtolower($order['status'])=='error'){
+              $error_orders[] = $order;
+              continue;
+            }
+        ?>
         <tr>
-            <td><?php echo anchor(base_url('admin/edit/'.$order['id']),'Edit',array('class'=>'link edit-link')); ?></td>
             <td>
-                <?php if(strtolower($order['order_type']) !== 'individual'): ?>
-                <?php echo anchor(base_url('admin/business/'.$order['id']),'Business',array('class'=>'link')); ?>
-                <?php else: ?>
+                <?php echo anchor(base_url('admin/edit/'.strtolower($order['order_type']).'/'.$order['order_id']),$order['transaction_id'],array('class'=>'link edit-link')); ?>
+            </td>
+            <td>
                 <?php echo $order['order_type']; ?>
-                <?php endif; ?>
             </td>
             <td><?php echo $order['first_name']; ?></td>
             <td><?php echo $order['middle_name']; ?></td>
@@ -38,8 +45,48 @@
             <td><?php echo statename($order['state']); ?></td>
             <td><?php echo mailto($order['email']); ?></td>
             <td><?php echo $order['status']; ?></td>
-            <td><?php echo ''; ?></td>
+            <td><?php echo getAction($order['order_id']); ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
+<?php if(count($error_orders)>0): ?>
+<h2>Recent Error Orders</h2>
+<table class="table table-striped table-hover well">
+    <thead>
+        <tr style="background:orangered">
+            <th>Transaction ID</th>
+            <th>Order Type</th>
+            <th>First Name</th>
+            <th>Middle Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>State</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($error_orders as $order): ?>
+        <tr>
+            <td>
+                <?php echo anchor(base_url('admin/edit/'.strtolower($order['order_type']).'/'.$order['order_id']),$order['transaction_id'],array('class'=>'link edit-link')); ?>
+            </td>
+            <td>
+                <?php echo $order['order_type']; ?>
+            </td>
+            <td><?php echo $order['first_name']; ?></td>
+            <td><?php echo $order['middle_name']; ?></td>
+            <td><?php echo $order['last_name']; ?></td>
+            <td><?php echo $order['date_of_birth']; ?></td>
+            <td><?php echo statename($order['state']); ?></td>
+            <td><?php echo mailto($order['email']); ?></td>
+            <td><?php echo $order['status']; ?></td>
+            <td><?php echo getAction($order['order_id']); ?></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php endif; ?>
+</div>

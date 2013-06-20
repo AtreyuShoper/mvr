@@ -5,10 +5,13 @@
  * and open the template in the editor.
  */
 ?>
-<?php echo form_open(base_url('admin/order/update'),array('class' => 'well form-horizontal','id' => 'order_edit')); ?>
+<div class='row'>
+    <div style='margin:0 auto;display:block;width:500px;'>
+<?php echo form_open(base_url('admin/update/individual/order'),array('class' => 'well form-horizontal','id' => 'order_edit')); ?>
 <fieldset>
-    <legend><?php echo $order[order_type]; ?></legend>
+    <legend>Edit <?php echo $order['order_type']; ?> transaction</legend>
     <?php 
+    echo form_hidden('order_id',$order['order_id']);
     echo form_hidden('id',$order['id']);
     echo form_hidden('order_type',$order['order_type']);
     ?>
@@ -40,7 +43,7 @@
     <div class="control-group">
         <label class="control-label" for="state">State</label>
         <div class="controls">
-            <?php echo form_dropdown('state_id',stateDropdown(), $order['state_id'], array('id' => 'state')); ?>
+            <?php echo form_dropdown('state',stateDropdown(), $order['state'], array('id' => 'state')); ?>
         </div>
     </div>
     <div class="control-group">
@@ -65,18 +68,24 @@
         </div>
     </div>
      <div class="control-group">
-        <label class="control-label" for="status">Status</label>
+        <label class="control-label" for="action">Action</label>
         <div class="controls">
             <?php
-                $_option_status = array(
+                $_option_action = array(
                     ''              => 'Select Action',
-                    'Processing'    => 'Prcessing',
-                    'Ordered'       => 'Ordered',
-                    'Completed'     => 'Completed',
-                    'Error'         => 'Error'
+                    'Release'    => 'Release',
+                    'Reprocess'       => 'Reprocess',
+                    'Resend'     => 'Resend'
                 )
             ?>
-            <?php echo form_dropdown('status',$_option_status, $order['status'],array('id' => 'status')); ?>
+            <?php echo form_dropdown('action',$_option_action, getAction($order['order_id']),array('id' => 'action')); ?>
         </div>
     </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button onclick="window.location='<?php echo base_url('admin'); ?>';return false;" class="btn">Cancel</button>
+    </div>
 </fieldset>
+<?php echo form_close(); ?>
+    </div>
+</div>

@@ -13,7 +13,7 @@ class Model_Individual extends CI_Model {
 		
 		if ($this->db->affected_rows() == '1')
 		{
-			return TRUE;
+			return$this->db->insert_id();
 		}
 		
 		return FALSE;
@@ -66,8 +66,8 @@ class Model_Individual extends CI_Model {
         {        
             //$this->db->order_by('individual_records.firstname', 'ASC');
             $this->db->select('individual_records.id,
-                                individual_records.firstname,
-                                individual_records.lastname,
+                                individual_records.first_name,
+                                individual_records.last_name,
                                 individual_records.date_of_birth,
                                 individual_records.drivers_license,
                                 individual_states.state,
@@ -77,8 +77,8 @@ class Model_Individual extends CI_Model {
             $this->db->from('individual_records');
             $this->db->where('individual_records.id', $id);
             $join = 'inner';
-            $this->db->join('individual_orders', 'individual_records.id = individual_orders.individual_records_id', $join);
-            $this->db->join('individual_states', 'individual_records.state_id = individual_state.id', $join);
+            $this->db->join('individual_orders', 'individual_records.id = individual_orders.individual_record_id', $join);
+            $this->db->join('individual_states', 'individual_records.state_id = individual_stateS.id', $join);
             $query = $this->db->get();
             return $query->result();
         }
@@ -92,7 +92,7 @@ class Model_Individual extends CI_Model {
         }
         function search()
         {
-            $this->db->query("SELECT * FROM individual_records WHERE firsname,lastname LIKE %search%");
+            $this->db->query("SELECT * FROM individual_records WHERE first_name,last_name LIKE %search%");
         }
         function state($id){
                 $this->db->select('state');
@@ -109,7 +109,7 @@ class Model_Individual extends CI_Model {
                 return $query->result();
         }
         function getId($id){
-                $this->db->select('individual_records.id, firstname');
+                $this->db->select('individual_records.id, first_name');
                 $this->db->from('individual_records');
                 $this->db->where('id');
                 $query = $this->db->get();
@@ -128,9 +128,9 @@ class Model_Individual extends CI_Model {
 	}
         function edit($id) {
 		$this->db->select('individual_records.id,
-                                    individual_records.firstname,
-                                    individual_records.middlename,
-                                    individual_records.lastname,
+                                    individual_records.first_name,
+                                    individual_records.middle_name,
+                                    individual_records.last_name,
                                     individual_records.address1,
                                     individual_records.address2,
                                     individual_records.city,
@@ -151,13 +151,19 @@ class Model_Individual extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update('individual_records', $data);
 	}
+        function updateOrder($id, $data)
+	{
+            
+		$this->db->where('id', $id);
+		$this->db->update('individual_orders', $data);
+	}
         function getRecord($id)
         {
             //$this->db->order_by('individual_records.firstname', 'ASC');
             $this->db->select(' individual_records.id,
-                                individual_records.firstname,
-                                individual_records.middlename,
-                                individual_records.lastname,
+                                individual_records.first_name,
+                                individual_records.middle_name,
+                                individual_records.last_name,
                                 individual_records.address1,
                                 individual_records.address2,
                                 individual_records.city,

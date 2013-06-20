@@ -13,7 +13,7 @@
                         $username = $this->session->userdata('login');
                         //print_r($username);
                         foreach($info as $row):
-                            $fname = $row->firstname;
+                            $fname = $row->first_name;
                         ?>
                             
                         <p>Welcome <?php echo anchor('/individual/profile/', ucwords($fname)); ?> <?php echo $date; ?></p>
@@ -38,8 +38,8 @@
                 $info as $row
                 ) :?>                 
            <tr>
-                <td width="10%"><?php echo ucwords($row->firstname);?></td>
-                <td width="10%"><?php echo ucwords($row->lastname);?></td>
+                <td width="10%"><?php echo ucwords($row->first_name);?></td>
+                <td width="10%"><?php echo ucwords($row->last_name);?></td>
                 <td width="10%"><?php echo $row->date_of_birth ?></td>
                 <td width="15%"><?php echo $row->drivers_license ?></td>
                 <td width="10%"><?php echo ucwords($row->state);?></td>
