@@ -14,12 +14,6 @@ class Admin extends CI_Controller {
     //put your code here
     function __construct() {
         parent::__construct();
-        $_data = array(
-            'admin_user'    => 'admin',
-            'admin_name'    => 'Administrator',
-            'is_logged'     => true
-        );
-        $this->session->set_userdata('admin_data',$_data);
         $this->load->model('admin/model_admin_orders');
     }
     function index(){
@@ -27,6 +21,7 @@ class Admin extends CI_Controller {
         print_r($this->model_orders->orders());
         echo "</pre>";
         die;*/
+        admin_logged_in_check();
         $_admin_data = $this->session->userdata('admin_data');
         if(!empty($_admin_data)){
          $data['admin_data'] = $_admin_data;   
@@ -37,6 +32,7 @@ class Admin extends CI_Controller {
     }
     
     function edit(){
+        admin_logged_in_check();
         $_order_id = $this->uri->segment(4);
         $_order_type = $this->uri->segment(3);
         $_admin_data = $this->session->userdata('admin_data');
@@ -59,6 +55,7 @@ class Admin extends CI_Controller {
     }
     
     function update(){
+        admin_logged_in_check();
         $_update_type = $this->uri->segment(3);
         echo $_update_type;
         switch ($_update_type) {
@@ -127,8 +124,32 @@ class Admin extends CI_Controller {
             break;
         }
         }
-
-
+function signin(){
+    $this->form_validation->set_error_delimiters('', '');
+    $this->form_validation->set_rules('login', 'Business  Account', 'required');
+    $this->form_validation->set_rules('pass', 'Password', 'required|min_length[4]');
+    //print_r($this->input->post());
+    if ( $this->form_validation->run() !== false ) {
+         // then validation passed. Get from db
+         $this->load->model('admin/model_admin_login');
+         $res = $this->model_admin_login->verify_account($this->input->post('login'),$this->input->post('pass'));
+         
+         if ( $res !== false ) {
+            $user_data = array('admin_data' => array('admin_user' => $res->user_name,'name' => $res->name),'logged' => true);
+            $this->session->set_userdata('userid',$res->id);
+            $this->session->set_userdata('admin_user_data',$user_data);
+            redirect(base_url('admin'));
+         }else{
+             $this->session->set_userdata('login_message','<strong>Invalid login!</stronng> Please check your username or password');
+         }
+      }
+    $data['title'] = 'Administration Panel : Login';
+    $this->template->load('admin_login', null, $data);
+}
+function logout(){
+    $this->session->sess_destroy();
+    redirect(base_url());
+}
 }
 
 ?>

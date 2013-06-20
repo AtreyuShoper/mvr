@@ -32,24 +32,46 @@
  
    <body>
        <div class="container">
+       <div class="wrapper row">
            <div class="row">
-               <div class="span4 logo">
-                   <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
-               </div>
-               <div class="span4">
-                   <?php if(isset($admin_data)): ?>
-                   <h5>Welcome, <?php echo $admin_data['admin_name'].' '. date('m/d/Y h:i A'); ?></h5>
-                   <?php endif; ?>
-               </div>
-               <div class="span4">
-                   <?php echo anchor(base_url('admin/logout'),'Logout'); ?>
-               </div>
-           </div>
-           <div class="row">
-            <div class="span12">
-                <?php echo $body; ?>
+            <div class="span12 well-small">
+                <div class="row">
+                    <div class="span9">
+                        <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
+                        <h3>Login to administration panel</h3>
+                    </div>
+                </div>
             </div>
            </div>
+           <div class="row">
+               <div class="span12">
+                   <?php echo form_open(base_url('admin/signin'),array('class' => 'well form-horizontal','id' => 'login_form')); ?>
+                   <fieldset>
+                       <legend>Login</legend>
+                       <?php if($this->session->userdata('login_message')): ?>
+                        <div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $this->session->userdata('login_message'); ?></div>
+                       <?php endif; ?>
+                        <?php echo validation_errors('<div class="alert"><button type="button" class="close" data-dismiss="alert">&times;</button>','</div>'); ?>
+                       <div class='control-group'>
+                        <label class='control-label' for='login'>User Name:</label>
+                            <div class='controls'>
+                                <input type="text" name="login" id='login'/>
+                            </div>
+                       </div>
+                        <div class='control-group'>
+                            <label class='control-label' for='pass'>Password:</label>
+                            <div class='controls'>
+                                <input type="password" name="pass" id='pass'/>
+                            </div>
+                        </div>
+                       <div class='form-actions'>
+                           <button type="submit" class="btn btn-primary">Login</button> <?php echo anchor(base_url(),'Back to homepage',array('class' => 'text-info')); ?>
+                       </div>
+                   </fieldset>
+                       <?php echo form_close(); ?>
+               </div>
+           </div>
+      </div>
        </div><!--end main-container-->
      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="<?php echo base_url('assets/business/js/vendor/jquery-1.9.1.min.js'); ?>"><\/script>')</script>

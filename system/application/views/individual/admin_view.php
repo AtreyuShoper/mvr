@@ -42,7 +42,7 @@
                 <td width="10%"><?php echo ucwords($row->last_name);?></td>
                 <td width="10%"><?php echo $row->date_of_birth ?></td>
                 <td width="15%"><?php echo $row->drivers_license ?></td>
-                <td width="10%"><?php echo ucwords($row->state);?></td>
+                <td width="10%"><?php echo ucwords(statename($row->state_id));?></td>
                 <td width="15%"><?php echo $row->email ?></td>
                 <td width="10%"><?php echo $row->status ?></td>                                    
                 <td width="20%"><?php echo ucwords($row->remarks) ?></td>

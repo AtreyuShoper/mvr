@@ -16,4 +16,14 @@ function business_logged_in_check() {
         redirect(base_url('business/signin'));
     }
 }
+function admin_logged_in_check() {
+    // Get current CodeIgniter instance
+    $CI =& get_instance();
+    // We need to use $CI->session instead of $this->session
+    $user = $CI->session->userdata('admin_user_data');
+    if (!isset($user['logged']) || $user['logged'] != TRUE)
+    {
+        redirect(base_url('admin/signin'));
+    }
+}
 ?>

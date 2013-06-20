@@ -7,17 +7,17 @@
 ?>
 <?php $id = $record['id']; ?>
     <?php echo form_open("individual/edit/$id");?>
-<label>Firstname</label>
-<?php echo form_error('firstname'); ?>
-        <?php echo form_input($firstname); ?>
+<label>First Name</label>
+<?php echo form_error('first_name'); ?>
+        <?php echo form_input($first_name); ?>
 
-<label>Middlename</label>
-<?php echo form_error('middlename'); ?>
-        <?php echo form_input($middlename); ?>
+<label>Middle Name</label>
+<?php echo form_error('middle_name'); ?>
+        <?php echo form_input($middle_name); ?>
 
-<label>Lastname</label>
- <?php echo form_error('lastname'); ?>
-        <?php echo form_input($lastname); ?>
+<label>Last Name</label>
+ <?php echo form_error('last_name'); ?>
+        <?php echo form_input($last_name); ?>
 
 <label>Address1</label>
 <?php echo form_error('address1'); ?>
@@ -32,8 +32,8 @@
         <?php echo form_input($city); ?>
 
 <label>State</label>
- <?php echo form_error('states_id'); ?>
-        <?php echo form_input($states_id);?>
+ <?php echo form_error('state_id'); ?>
+        <?php echo form_input($state_id);?>
         <?php 
              $selected_state = $this->input->post('state_id');
              echo form_dropdown('state_id', $states, $selected_state);

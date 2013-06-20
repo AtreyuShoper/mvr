@@ -70,15 +70,14 @@ class Model_Individual extends CI_Model {
                                 individual_records.last_name,
                                 individual_records.date_of_birth,
                                 individual_records.drivers_license,
-                                individual_states.state,
+                                individual_records.state_id,
                                 individual_records.email,
                                 individual_orders.`status`,
                                 individual_orders.remarks');    
-            $this->db->from('individual_records');
-            $this->db->where('individual_records.id', $id);
-            $join = 'inner';
-            $this->db->join('individual_orders', 'individual_records.id = individual_orders.individual_record_id', $join);
-            $this->db->join('individual_states', 'individual_records.state_id = individual_stateS.id', $join);
+            $this->db->from('individual_orders');
+            $this->db->where('individual_orders.id', $id);
+            $join = 'left';
+            $this->db->join('individual_records', 'individual_records.id = individual_orders.individual_record_id', $join);
             $query = $this->db->get();
             return $query->result();
         }
@@ -167,7 +166,7 @@ class Model_Individual extends CI_Model {
                                 individual_records.address1,
                                 individual_records.address2,
                                 individual_records.city,
-                                individual_states.state,
+                                individual_records.state_id,
                                 individual_records.zip_code,
                                 individual_records.phone,
                                 individual_records.email,
@@ -175,8 +174,6 @@ class Model_Individual extends CI_Model {
                                 individual_records.date_of_birth');    
             $this->db->from('individual_records');
             $this->db->where('individual_records.id', $id);
-            $join = 'inner';
-            $this->db->join('individual_states', 'individual_records.state_id = individual_state.id', $join);
             $query = $this->db->get();
             return $query->result();
         }

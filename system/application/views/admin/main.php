@@ -5,10 +5,11 @@
  * and open the template in the editor.
  */
 ?>
-<div class="well">
-<h2 class="well-small">Recent Orders</h2>
 <table class="table table-striped table-hover well">
     <thead>
+        <tr>
+            <td colspan="10" class=""><strong>Recent Orders</strong></td>
+        </tr>
         <tr style="background: #0064cd">
             <th>Transaction ID</th>
             <th>Order Type</th>
@@ -51,9 +52,12 @@
     </tbody>
 </table>
 <?php if(count($error_orders)>0): ?>
-<h2>Recent Error Orders</h2>
+
 <table class="table table-striped table-hover well">
     <thead>
+        <tr>
+            <td colspan="10" class="text-center"><strong>Recent Error Orders</strong></td>
+        </tr>
         <tr style="background:orangered">
             <th>Transaction ID</th>
             <th>Order Type</th>
@@ -89,4 +93,3 @@
     </tbody>
 </table>
 <?php endif; ?>
-</div>

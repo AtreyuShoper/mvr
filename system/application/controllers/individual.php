@@ -383,9 +383,9 @@ class Individual extends CI_Controller {
 		if (isset($_POST) && !empty($_POST))
 		{		
 			$data = array(
-					       	'firstname'         =>  $this->input->post('first_name'),
-					       	'middlename'        =>  $this->input->post('middle_name'),
-					       	'lastname'          =>  $this->input->post('last_name'),
+					       	'first_name'         =>  $this->input->post('first_name'),
+					       	'middle_name'        =>  $this->input->post('middle_name'),
+					       	'last_name'          =>  $this->input->post('last_name'),
 					       	'address1'          =>  $this->input->post('address1'),
 					       	'address2'          =>  $this->input->post('address2'),
 					       	'city'              =>  $this->input->post('city'),
@@ -413,18 +413,18 @@ class Individual extends CI_Controller {
                 $this->data['record'] = $record;
               
 		//display the edit product form
-		$this->data['firstname'] = array(
-			'name'  	=> 'firstname',
-			'value' 	=> $this->form_validation->set_value('firstname', $record['firstname']),
+		$this->data['first_name'] = array(
+			'name'  	=> 'first_name',
+			'value' 	=> $this->form_validation->set_value('first_name', $record['first_name']),
 		);
-                $this->data['middlename'] = array(
-			'name'  	=> 'middlename',
-			'value' 	=> $this->form_validation->set_value('middlename', $record['middlename']),
+                $this->data['middle_name'] = array(
+			'name'  	=> 'middle_name',
+			'value' 	=> $this->form_validation->set_value('middle_name', $record['middle_name']),
 		);
 		
-		$this->data['lastname'] = array(
-			'name'  	=> 'lastname',
-			'value' 	=> $this->form_validation->set_value('lastname', $record['lastname']),
+		$this->data['last_name'] = array(
+			'name'  	=> 'last_name',
+			'value' 	=> $this->form_validation->set_value('last_name', $record['last_name']),
 		);
 	
 		$this->data['address1'] = array(
@@ -439,10 +439,10 @@ class Individual extends CI_Controller {
 			'name'  => 'city',
 			'value' => $this->form_validation->set_value('city', $record['city']),
 		);
-                $this->data['states_id'] = array(
-			'name'  => 'states_id',
+                $this->data['state_id'] = array(
+			'name'  => 'state_id',
                         'type'  => 'hidden',
-			'value' => $this->form_validation->set_value('states_id', $record['states_id']),
+			'value' => $this->form_validation->set_value('state_id', $record['state_id']),
 		);
                 $this->data['zip_code'] = array(
 			'name'  => 'zip_code',
@@ -469,8 +469,8 @@ class Individual extends CI_Controller {
                 $this->session->set_userdata('edit', $this->data);
                 
                 $value = $this->session->userdata('edit');
-                $id =  $value['states_id']['value'];
-                $query1 = $this->model_individual->state($id['states_id']);
+                $id =  $value['state_id']['value'];
+                $query1 = $this->model_individual->state($id['state_id']);
                 $statename = $query1[0]->state;
                 $this->data['states'] = $this->model_individual->statedropdown($id, $statename);
                 

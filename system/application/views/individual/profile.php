@@ -12,17 +12,17 @@
   <tr>
     <td width="112">First Name</td>
     <td width="7">&nbsp;</td>
-    <td width="170"><?php echo ucwords($row->firstname); ?></td>
+    <td width="170"><?php echo ucwords($row->first_name); ?></td>
   </tr>
   <tr>
     <td>Middle Name</td>
     <td>&nbsp;</td>
-    <td><?php echo ucwords($row->middlename); ?></td>
+    <td><?php echo ucwords($row->middle_name); ?></td>
   </tr>
   <tr>
     <td>Last Name</td>
     <td>&nbsp;</td>
-    <td><?php echo ucwords($row->lastname); ?></td>
+    <td><?php echo ucwords($row->last_name); ?></td>
   </tr>
   <tr>
     <td>Address1</td>
@@ -42,7 +42,7 @@
   <tr>
     <td>State</td>
     <td>&nbsp;</td>
-    <td><?php echo ucwords($row->state); ?></td>
+    <td><?php echo ucwords(statename($row->state_id)); ?></td>
   </tr>
   <tr>
     <td>Phone</td>
