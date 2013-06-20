@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="<?php echo base_url('assets/business/css/bootstrap.min.css');?>">
         <style>
             body {
-                padding-top: 10px;
-                padding-bottom: 40px;
+                padding-top:10px;
+                padding-bottom:40px;
             }
         </style>
         <link rel="stylesheet" href="<?php echo base_url('assets/business/css/bootstrap-responsive.min.css'); ?>">
