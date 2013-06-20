@@ -37,8 +37,9 @@
                    <img src="<?php echo base_url('assets/business/img/logo.png'); ?>" />
                </div>
                <div class="span4">
-                   <?php if(isset($admin_data)): ?>
-                   <h5>Welcome, <?php echo $admin_data['admin_name'].' '. date('m/d/Y h:i A'); ?></h5>
+                   <?php if($this->session->userdata('admin_user_data')): ?>
+                    <?php $admin_data = $this->session->userdata('admin_user_data'); ?>
+                   <h5>Welcome, <?php echo $admin_data['admin_data']['name'].' '. date('m/d/Y h:i A'); ?></h5>
                    <?php endif; ?>
                </div>
                <div class="span4">
